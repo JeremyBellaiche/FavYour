@@ -10,17 +10,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class HomeController extends Controller
 {
+    // Page d'Accueil : Route => /
     /**
     * @Route("/", name="homepage")
     */
     public function indexAction()
     {
+        $projects = $this->getDoctrine()->getManager()->getRepository('ProjectBundle:Project')->findAll();
+
         return $this->render('BaseBundle:Home:index.html.twig',[
-            'projects' => array(
-                    array('title'=>'Mon super projet1', 'description'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, doloremque?', 'image'=>'image1.png'),
-                    array('title'=>'Mon super projet2', 'description'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, doloremque?', 'image'=>'image1.png'),
-                    array('title'=>'Mon super projet3', 'description'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, doloremque?', 'image'=>'image1.png'),
-                ),
+            'projects' => $projects,
         ]);
     }
 
