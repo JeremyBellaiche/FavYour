@@ -18,7 +18,7 @@ class HomeController extends Controller
     {
         $projects = $this->getDoctrine()->getManager()
                     ->getRepository('ProjectBundle:Project')
-                    ->findByHomepage('1');
+                    ->findByHomepage('1', array('id'=>'desc'), 4);
 
         return $this->render('BaseBundle:Home:index.html.twig',[
             'projects' => $projects,
