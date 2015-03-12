@@ -23,7 +23,7 @@
 
 
 			        {% for project in projects %}
-					<div class="col-md-6">
+					<div class="col-md-6 project-home">
 						<div>
 							<div class="col-md-4">
 								<img src="{{ asset('uploads/membres/' ~ project.image) }}" alt="" class="img-circle img-projet">
@@ -41,8 +41,11 @@
 								<h4>{{project.title}}</h4>
 
 								<span>
-									{{ project.description | slice(0,250)}}
+									{{ project.description | slice(0,230) ~ '...' }}
 								</span>
+								<div class="clearfix"></div>
+								<a>En savoir plus</a>
+
 							</div>
 						</div>
 					</div>
