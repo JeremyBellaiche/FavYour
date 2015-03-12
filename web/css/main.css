@@ -1,0 +1,180 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+.navbar-brand img {
+	width: 150px;
+	margin-right: 20px;
+}
+
+.navbar-brand {
+	padding-top: 8px;
+}
+
+.list-categories li{
+	background: #FFF;
+	color:#000;
+	border:1px solid #000;
+	padding:10px 0;
+	width:110px;
+	margin: 5px;
+	text-align: center;
+	border-radius: 3px;
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	-ms-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+
+.list-categories li:hover, .list-categories li.selected{
+	background: #000;
+	color:#FFF;
+	border:1px solid #000;
+}
+
+
+.container-profil{
+	background-color: rgba(199, 199, 199, 0.2);
+}
+
+.container-profil h2{
+}
+
+.avatar-projet{
+	margin-left: 60px;
+	width:200px;
+	height:200px; 
+}
+
+
+.bar-avancement-project{
+	margin-top: 10px;
+	margin-left: 45px;
+}
+
+.info-project{
+	
+}
+
+
+.marge-info{
+	margin-top: 50px;
+}
+
+
+.onglet-project{
+	margin-top: 20px;
+}
+
+.intro{
+	text-align: center; 
+	padding: 160px 0;
+	background-color: #ddd;
+	background: url(../img/background.png) no-repeat center center fixed ;
+	color: #FFF;
+	
+	/* Pour tout les navigateurs */
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.intro .brand-name{
+	font-size: 50px;
+	font-weight: 100;
+}
+
+
+.intro h1{
+	font-weight: 100;
+}
+
+
+.btn-cta {
+  margin: 20px 0 0;
+  padding: 10px 15px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+.btn-cta:hover {
+  color: #0098d3;
+  background-color: #f4f4f4;
+}
+
+.img-projet{
+	width: 140px;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+
+.projet-semaine h1{
+	text-align: center;
+}
+
+
+.titre-projetsemaine{
+	padding-bottom: 20px;
+}
+
+
+.projet-semaine-inf{
+margin-top: 40px;
+}
+
+
+.bar-prog-index{
+	margin-top: 5px;
+	margin-left: 10px;
+}
+
+
+.padding-section1-projet{
+	padding-bottom: 20px;
+}
+
+.marge-btn-projet{
+	margin-top: 90px;
+}
+
+.margin-tab-project{
+	margin-top: 5px;
+}
+
+.titre-descr-proj{
+	text-align: center;
+}
+
+
+.log-theme{
+	background-color: rgba(199, 199, 199, 0.2);
+	border-radius: 5px;
+	border: 1px solid #DDD;
+	padding-bottom: 10px;
+}
+
+
+.btn-connexion-margin{
+	margin-left: 46px;
+}
+
+.phrase-inscription{
+	
+}
+
+.hr-colore{
+	border-top: 1px solid black;
+}
+
+.margin-fb-btn{
+	margin-left: 30px;
+}
