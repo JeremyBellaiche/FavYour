@@ -1,11 +1,8 @@
 base:
-    resource: "@BaseBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: @BaseBundle/Controller/
+    type:     annotation
+
 
 project:
-    resource: "@ProjectBundle/Resources/config/routing.yml"
-    prefix:   /
-
-app:
-    resource: @AppBundle/Controller/
+    resource: @ProjectBundle/Controller/
     type:     annotation
