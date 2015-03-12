@@ -1,5 +1,18 @@
 {# src/BaseBundle/Resources/views/Home/index.html.twig #}
 {% extends "::base.html.twig" %}
+
+	{% block header %}
+			<header class="intro">
+		<div class="container">
+			<span class="brand-name">
+				Bienvenue sur FavYour
+			</span>
+			<h1>Vos projets, votre aide</h1>
+			<a href="#" class="btn btn-cta"><i class="fa fa-chevron-circle-right"></i> Commencer</a>
+		</div>
+	</header>
+	{% endblock %}
+
 		
 		{% block body %}
 		<section class="projet-semaine">
