@@ -36,6 +36,13 @@ class Project
     private $amountRequested;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="amount_won", type="integer")
+     */
+    private $amountWon;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="end_date", type="datetime")
@@ -69,6 +76,20 @@ class Project
      * @ORM\Column(name="managers", type="text")
      */
     private $managers;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="homepage", type="integer", scale=1, options={"default" = 0})
+     */
+    private $homepage;
 
 
     /**
@@ -240,5 +261,74 @@ class Project
     public function getManagers()
     {
         return $this->managers;
+    }
+
+    /**
+     * Set homepage
+     *
+     * @param integer $homepage
+     * @return Project
+     */
+    public function setHomepage($homepage)
+    {
+        $this->homepage = $homepage;
+
+        return $this;
+    }
+
+    /**
+     * Get homepage
+     *
+     * @return integer 
+     */
+    public function getHomepage()
+    {
+        return $this->homepage;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return Project
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set amountWon
+     *
+     * @param integer $amountWon
+     * @return Project
+     */
+    public function setAmountWon($amountWon)
+    {
+        $this->amountWon = $amountWon;
+
+        return $this;
+    }
+
+    /**
+     * Get amountWon
+     *
+     * @return integer 
+     */
+    public function getAmountWon()
+    {
+        return $this->amountWon;
     }
 }

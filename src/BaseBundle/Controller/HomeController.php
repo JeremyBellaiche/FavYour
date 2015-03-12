@@ -16,7 +16,9 @@ class HomeController extends Controller
     */
     public function indexAction()
     {
-        $projects = $this->getDoctrine()->getManager()->getRepository('ProjectBundle:Project')->findAll();
+        $projects = $this->getDoctrine()->getManager()
+                    ->getRepository('ProjectBundle:Project')
+                    ->findByHomepage('1');
 
         return $this->render('BaseBundle:Home:index.html.twig',[
             'projects' => $projects,
