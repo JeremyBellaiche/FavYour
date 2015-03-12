@@ -44,7 +44,7 @@
 									{{ project.description | slice(0,230) ~ '...' }}
 								</span>
 								<div class="clearfix"></div>
-								<a>En savoir plus</a>
+								<a href="{{ path('project_show', {'id': project.id}) }}">En savoir plus</a>
 
 							</div>
 						</div>
