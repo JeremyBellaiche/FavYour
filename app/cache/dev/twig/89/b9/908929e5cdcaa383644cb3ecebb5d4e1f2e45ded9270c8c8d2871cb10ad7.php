@@ -53,10 +53,10 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
     public function block_body($context, array $blocks = array())
     {
         // line 18
-        echo "\t\t<section class=\"projet-semaine\">
+        echo "\t<section class=\"projet-semaine\">
+\t\t<div class=\"container\">
 \t\t\t<div class=\"row\">
-\t\t\t\t<div class=\"col-md-1\"></div>
-\t\t\t\t<div class=\"col-md-10\">
+\t\t\t\t<div class=\"col-md-10 col-md-offset-1\">
 \t\t\t\t\t<h1 class=\"titre-projetsemaine\">Projets de la semaine</h1>
 
 
@@ -66,7 +66,7 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
         $context['_seq'] = twig_ensure_traversable((isset($context["projects"]) ? $context["projects"] : $this->getContext($context, "projects")));
         foreach ($context['_seq'] as $context["_key"] => $context["project"]) {
             // line 26
-            echo "\t\t\t\t\t<div class=\"col-md-6\">
+            echo "\t\t\t\t\t<div class=\"col-md-6 project-home\">
 \t\t\t\t\t\t<div>
 \t\t\t\t\t\t\t<div class=\"col-md-4\">
 \t\t\t\t\t\t\t\t<img src=\"";
@@ -76,7 +76,12 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
 
 
 \t\t\t\t\t\t\t\t<div class=\"progress bar-prog-index\">
-\t\t\t\t\t\t\t          <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:60%;\">
+\t\t\t\t\t\t\t          <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"";
+            // line 33
+            echo twig_escape_filter($this->env, (($this->getAttribute($context["project"], "amountWon", array()) / $this->getAttribute($context["project"], "amountRequested", array())) * 100), "html", null, true);
+            echo "\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:";
+            echo twig_escape_filter($this->env, (($this->getAttribute($context["project"], "amountWon", array()) / $this->getAttribute($context["project"], "amountRequested", array())) * 100), "html", null, true);
+            echo "%;\">
 \t\t\t\t\t\t\t            ";
             // line 34
             echo twig_escape_filter($this->env, (($this->getAttribute($context["project"], "amountWon", array()) / $this->getAttribute($context["project"], "amountRequested", array())) * 100), "html", null, true);
@@ -95,9 +100,15 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
 \t\t\t\t\t\t\t\t<span>
 \t\t\t\t\t\t\t\t\t";
             // line 44
-            echo twig_escape_filter($this->env, twig_slice($this->env, $this->getAttribute($context["project"], "description", array()), 0, 250), "html", null, true);
+            echo twig_escape_filter($this->env, (twig_slice($this->env, $this->getAttribute($context["project"], "description", array()), 0, 230) . "..."), "html", null, true);
             echo "
 \t\t\t\t\t\t\t\t</span>
+\t\t\t\t\t\t\t\t<div class=\"clearfix\"></div>
+\t\t\t\t\t\t\t\t<a href=\"";
+            // line 47
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_show", array("id" => $this->getAttribute($context["project"], "id", array()))), "html", null, true);
+            echo "\">En savoir plus</a>
+
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
@@ -106,12 +117,13 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['project'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 50
+        // line 53
         echo "
 \t\t\t\t</div>
 \t\t\t</div>
-\t\t</section>
-\t\t";
+\t\t</div>
+\t</section>
+\t";
     }
 
     public function getTemplateName()
@@ -126,6 +138,6 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
 
     public function getDebugInfo()
     {
-        return array (  110 => 50,  98 => 44,  92 => 41,  82 => 34,  74 => 29,  69 => 26,  65 => 25,  56 => 18,  53 => 17,  40 => 5,  37 => 4,  11 => 2,);
+        return array (  121 => 53,  109 => 47,  103 => 44,  97 => 41,  87 => 34,  81 => 33,  74 => 29,  69 => 26,  65 => 25,  56 => 18,  53 => 17,  40 => 5,  37 => 4,  11 => 2,);
     }
 }

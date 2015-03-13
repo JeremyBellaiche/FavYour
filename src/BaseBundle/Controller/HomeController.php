@@ -34,4 +34,24 @@ class HomeController extends Controller
     }
     */
 
+
+    // Page Push : Route => /push
+    /**
+    * @Route("/push", name ="push")
+    */
+    public function pushAction()
+    {
+        return $this->render('ProjectBundle:Push:push.html.twig');
+    }
+
+
+    // Page Pushers : Route => /be-pushed
+    /**
+    * @Route("/be-pushed",name="bepushed")
+    */
+    public function bepushedAction(){
+        return $this->render('ProjectBundle:Push:bepushed.html.twig');
+    }
+
+
 }

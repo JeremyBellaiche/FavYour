@@ -2,8 +2,163 @@
 {% extends "::base.html.twig" %}
 
 	{% block body %}
-	ID : {{project.id}}<br>
-	Title : {{project.title}}<br>
+
+
+	<div class="container container-profil col-md-12">
+      <div class="col-md-1"></div>
+      <div class="col-md-11">
+        <h2>{{project.title}}</h2>
+
+        <div class="col-md-4">
+        	   <img src="{{ asset('uploads/membres/' ~ project.image) }}" alt="" class="img-circle avatar-projet">
+    		
+      
+              <div class="col-md-8 bar-avancement-project">
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="{{ project.amountWon / project.amountRequested * 100 }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ project.amountWon / project.amountRequested * 100 }}%;">
+							            {{ project.amountWon / project.amountRequested * 100 }}%
+							          </div>
+                </div>
+              </div>
+        </div>
+
+        <div class="col-md-8">
+
+          <section class="padding-section1-projet">
+            <div class="col-md-3">
+              <span>
+                <h1>{{project.amountRequested}} €</h1>
+              </span>
+              <span>
+                <h4>Demandés</h4>
+              </span>
+
+              
+              
+            
+
+            </div>
+            <div class="col-md-3">
+              <span>
+                <h1>{{project.amountWon}} €</h1>
+              </span>
+              <span>
+                <h4>Récoltés</h4>
+              </span>
+            </div>
+
+
+          <div class="col-md-3">
+              <span>
+                <h1>A faire</h1>
+              </span>
+              <span>
+                <h4>Jours restants</h4>
+              </span>
+            </div>
+
+
+
+            <div class="col-md-3">
+              <span>
+                <h1>A faire</h1>
+              </span>
+              <span>
+                <h4>Pushers</h4>
+              </span>
+            </div>
+
+
+            
+          </section>
+          
+          <section class="marge-btn-projet">
+            <div class="col-md-3">
+              <button type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon glyphicon-euro" aria-hidden="true"></span> Participer</button>
+            </div>
+            <div class="col-md-3"> 
+              <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> Ajouter aux favoris</button>
+            </div>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Partager sur Facebook</button>
+            </div>
+            <div class="col-md-3">
+              
+            </div>
+          </section>
+
+
+          <section>
+            <div class="col-md-12 info-project marge-info">
+              <table>
+                <tbody>
+                  <tr>
+                    <th width="100px">Fondateurs : </th>
+                    <td>Aroul Retina, Yannis Gil, Samuel Benichou, Salah Saiad</td>
+                  </tr>
+                  <tr>
+                    <th>Localisation :</th>
+                    <td>{{project.location}}</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </section>
+          
+          
+        </div>
+      </div>
+    </div>
+      
+      <div class="col-md-1"></div>
+      <div class="col-md-10 margin-tab-project">
+      <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+        <ul id="myTab" class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Présentation</a></li>
+
+          <li role="presentation" class=""><a href="#recompenses" role="tab" id="recompenses-tab" data-toggle="tab" aria-controls="recompenses" aria-expanded="false">Récompenses</a></li>
+
+          <li role="presentation" class=""><a href="#publications" role="tab" id="publications-tab" data-toggle="tab" aria-controls="publications" aria-expanded="false">Publications</a></li>
+
+          <li role="presentation" class=""><a href="#commentaires" role="tab" id="commentaires-tab" data-toggle="tab" aria-controls="commentaires" aria-expanded="false">Commentaires</a></li>
+
+          
+        </ul>
+
+
+
+        <div id="myTabContent" class="tab-content">
+          <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+            
+            <h3 class="titre-descr-proj">Notre histoire</h3>
+            <p>
+              {{project.description}}
+            </p>
+
+            
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="recompenses" aria-labelledby="recompenses-tab">
+            <p>
+              2
+            </p>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="publications" aria-labelledby="publications-tab">
+            <p>
+              3
+            </p>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="commentaires" aria-labelledby="commentaires-tab">
+            <p>
+              4
+            </p>
+          </div>
+
+        </div>
+  </div>
+  </div>  
+
+
 
 
 	{% endblock %}
