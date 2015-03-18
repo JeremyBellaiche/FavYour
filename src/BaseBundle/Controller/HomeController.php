@@ -53,5 +53,8 @@ class HomeController extends Controller
         return $this->render('ProjectBundle:Push:bepushed.html.twig');
     }
 
+    public function newprojectAction(){
+        return $this->render('ProjectBundle:Push:newproject.html.twig');
+    }
 
 }

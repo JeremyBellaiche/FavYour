@@ -189,50 +189,65 @@ class __TwigTemplate_e28f97b90f0d2a812496aab8b0026b0af6ed5db179eae9969f0898af0a2
                 requestCounter[0].className = className;
             };
 
+        var addEventListener;
+
+        var el = document.createElement('div');
+        if (!'addEventListener' in el) {
+            addEventListener = function (element, eventName, callback) {
+                element.attachEvent('on' + eventName, callback);
+            };
+        } else {
+            addEventListener = function (element, eventName, callback) {
+                element.addEventListener(eventName, callback, false);
+            };
+        }
+
         ";
-        // line 174
+        // line 187
         if (array_key_exists("excluded_ajax_paths", $context)) {
-            // line 175
-            echo "            var proxied = XMLHttpRequest.prototype.open;
+            // line 188
+            echo "            if (window.XMLHttpRequest) {
+                var proxied = XMLHttpRequest.prototype.open;
 
-            XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {
-                var self = this;
+                XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {
+                    var self = this;
 
-                /* prevent logging AJAX calls to static and inline files, like templates */
-                if (url.substr(0, 1) === '/' && !url.match(new RegExp(\"";
-            // line 181
+                    /* prevent logging AJAX calls to static and inline files, like templates */
+                    if (url.substr(0, 1) === '/' && !url.match(new RegExp(\"";
+            // line 195
             echo twig_escape_filter($this->env, (isset($context["excluded_ajax_paths"]) ? $context["excluded_ajax_paths"] : $this->getContext($context, "excluded_ajax_paths")), "html", null, true);
             echo "\"))) {
-                    var stackElement = {
-                        loading: true,
-                        error: false,
-                        url: url,
-                        method: method,
-                        start: new Date()
-                    };
+                        var stackElement = {
+                            loading: true,
+                            error: false,
+                            url: url,
+                            method: method,
+                            start: new Date()
+                        };
 
-                    requestStack.push(stackElement);
+                        requestStack.push(stackElement);
 
-                    this.addEventListener(\"readystatechange\", function() {
-                        if (self.readyState == 4) {
-                            stackElement.duration = new Date() - stackElement.start;
-                            stackElement.loading = false;
-                            stackElement.error = self.status < 200 || self.status >= 400;
-                            stackElement.profile = self.getResponseHeader(\"X-Debug-Token\");
-                            stackElement.profilerUrl = self.getResponseHeader(\"X-Debug-Token-Link\");
+                        this.addEventListener('readystatechange', function() {
+                            if (self.readyState == 4) {
+                                stackElement.duration = new Date() - stackElement.start;
+                                stackElement.loading = false;
+                                stackElement.error = self.status < 200 || self.status >= 400;
+                                stackElement.profile = self.getResponseHeader(\"X-Debug-Token\");
+                                stackElement.profilerUrl = self.getResponseHeader(\"X-Debug-Token-Link\");
 
-                            Sfjs.renderAjaxRequests();
-                        }
-                    }, false);
+                                Sfjs.renderAjaxRequests();
+                            }
+                        }, false);
 
-                    Sfjs.renderAjaxRequests();
-                }
+                        Sfjs.renderAjaxRequests();
+                    }
 
-                proxied.apply(this, Array.prototype.slice.call(arguments));
-            };
+                    proxied.apply(this, Array.prototype.slice.call(arguments));
+                };
+            }
         ";
         }
-        // line 210
+        // line 225
         echo "
         return {
             hasClass: hasClass,
@@ -244,6 +259,8 @@ class __TwigTemplate_e28f97b90f0d2a812496aab8b0026b0af6ed5db179eae9969f0898af0a2
             getPreference: getPreference,
 
             setPreference: setPreference,
+
+            addEventListener: addEventListener,
 
             request: request,
 
@@ -303,6 +320,6 @@ class __TwigTemplate_e28f97b90f0d2a812496aab8b0026b0af6ed5db179eae9969f0898af0a2
 
     public function getDebugInfo()
     {
-        return array (  236 => 210,  204 => 181,  196 => 175,  194 => 174,  19 => 1,);
+        return array (  251 => 225,  218 => 195,  209 => 188,  207 => 187,  19 => 1,);
     }
 }

@@ -1,9 +1,20 @@
 {# src/ProjectBundle/Resources/views/Project/show.html.twig #}
 {% extends "::base.html.twig" %}
 
+	
+	
+	{% block header %}
+			<header class="intro-bepushed">
+				<div class="container">
+					<span class="brand-name">
+						Bienvenue sur FavYour
+					</span>
+					<h1>Vos projets, votre aide</h1>
+					<a href="{{path('new-project')}}" class="btn btn-cta"><i class="fa fa-chevron-circle-right"></i> Lancez votre projet !</a>
+				</div>
+			</header>
+	{% endblock %}
+		
 	{% block body %}
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim numquam harum magni deserunt, quaerat ab vel incidunt quidem accusantium totam at, illo eius perspiciatis eum mollitia fuga dolores corporis beatae!
-
-
+		
 	{% endblock %}

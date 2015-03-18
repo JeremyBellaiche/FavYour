@@ -1,0 +1,62 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+    <div class="col-md-4"></div>
+      <div class="col-md-4 log-theme">
+        <h2>Connexion</h2>
+
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        
+        
+        <div class="col-md-offset-1 col-md-10">
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                <input type="hidden"  name="_csrf_token" value="{{ csrf_token }}" />
+
+
+                <div class="form-group">
+                    <label for="username">{{ 'security.login.username'|trans }}</label>
+                    <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="Nom d'utilisateur" required="required" />
+                
+                    <div class="clearfix"></div>
+
+                    <label for="password">{{ 'security.login.password'|trans }}</label>
+                    <input type="password" class="form-control" id="password" name="_password" placeholder="Mot de passe" required="required" />
+
+                    <div class="clearfix"></div> 
+
+                    
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                        <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                    
+
+                    <div class="clearfix"></div>
+
+                    
+                     <input type="submit" class="btn btn-success col-md-5" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                    
+                    </form>
+                    
+            <input type="submit" class="btn btn-warning col-md-offset-1 col-md-6" id="_submit" name="_submit" value="Mot de passe oublié" />
+                    
+
+                </div>
+            
+            <div class="clearfix"></div>
+    
+             <hr class="hr-colore">
+                <span>
+                  Pas encore de compte ? <a href="">Inscrivez vous !</a>
+                </span>
+
+                <hr class="hr-colore">
+
+          <a href="#" class="btn btn-primary btn-lg active margin-fb-btn" role="button">Connexion par Facebook</a>
+        </div>
+
+    </div>
+{% endblock fos_user_content %}

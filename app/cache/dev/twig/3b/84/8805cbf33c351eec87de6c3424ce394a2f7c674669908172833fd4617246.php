@@ -101,12 +101,19 @@ class __TwigTemplate_3b848805cbf33c351eec87de6c3424ce394a2f7c674669908172833fd46
                     <button type=\"submit\" class=\"btn btn-default\"> <i class=\"fa fa-search\"></i></button>
                 </form>
 
-                <form class=\"navbar-form navbar-right\" role=\"form\">
+                <div class=\"navbar-form navbar-right\">
                     <div class=\"form-group\">
-                        <button type=\"submit\" class=\"btn btn-success\">Connexion</button>
+                        <a href=\"";
+        // line 69
+        echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
+        echo "\"><button type=\"button\" class=\"btn btn-success\">Connexion</button></a>
+                    
+                        <a href=\"";
+        // line 71
+        echo $this->env->getExtension('routing')->getPath("fos_user_registration_register");
+        echo "\"><button type=\"button\" class=\"btn btn-primary\">Inscription</button></a>
                     </div>
-                        <button type=\"button\" class=\"btn btn-primary\">Inscription</button>
-                </form>
+                </div>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -114,45 +121,45 @@ class __TwigTemplate_3b848805cbf33c351eec87de6c3424ce394a2f7c674669908172833fd46
     </nav>
     
     ";
-        // line 79
+        // line 80
         $this->displayBlock('header', $context, $blocks);
-        // line 81
+        // line 82
         echo "
     <div id=\"content\">
         ";
-        // line 83
+        // line 84
         $this->displayBlock('body', $context, $blocks);
-        // line 85
+        // line 86
         echo "    </div>
 
     <script src=\"https://code.jquery.com/jquery-1.11.2.js\"></script>
     <script src=\"";
-        // line 88
+        // line 89
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/vendor/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 89
+        // line 90
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 90
+        // line 91
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/main.js"), "html", null, true);
         echo "\"></script>
 </body>
 </html>";
     }
 
-    // line 79
+    // line 80
     public function block_header($context, array $blocks = array())
     {
-        // line 80
+        // line 81
         echo "    ";
     }
 
-    // line 83
+    // line 84
     public function block_body($context, array $blocks = array())
     {
-        // line 84
+        // line 85
         echo "        ";
     }
 
@@ -168,6 +175,6 @@ class __TwigTemplate_3b848805cbf33c351eec87de6c3424ce394a2f7c674669908172833fd46
 
     public function getDebugInfo()
     {
-        return array (  156 => 84,  153 => 83,  149 => 80,  146 => 79,  139 => 90,  135 => 89,  131 => 88,  126 => 85,  124 => 83,  120 => 81,  118 => 79,  92 => 56,  86 => 53,  74 => 46,  51 => 26,  40 => 18,  21 => 1,);
+        return array (  163 => 85,  160 => 84,  156 => 81,  153 => 80,  146 => 91,  142 => 90,  138 => 89,  133 => 86,  131 => 84,  127 => 82,  125 => 80,  113 => 71,  108 => 69,  92 => 56,  86 => 53,  74 => 46,  51 => 26,  40 => 18,  21 => 1,);
     }
 }

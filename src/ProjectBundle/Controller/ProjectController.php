@@ -22,4 +22,16 @@ class ProjectController extends Controller
         return ['project' => $project];
     }
 
+
+    /**
+    * @Route("/new-project", name="new-project")
+    */
+
+    public function addAction(){
+    	return $this->render("ProjectBundle:Push:newproject.html.twig");
+    }
+
+
+
+
 }

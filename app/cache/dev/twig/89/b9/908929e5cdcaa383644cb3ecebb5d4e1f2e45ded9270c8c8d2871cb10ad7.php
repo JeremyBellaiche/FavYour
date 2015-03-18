@@ -38,12 +38,15 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
     {
         // line 5
         echo "\t\t\t<header class=\"intro\">
-\t\t<div class=\"container\">
+\t\t\t\t<div class=\"container\">
 \t\t\t<span class=\"brand-name\">
 \t\t\t\tBienvenue sur FavYour
 \t\t\t</span>
 \t\t\t<h1>Vos projets, votre aide</h1>
-\t\t\t<a href=\"#\" class=\"btn btn-cta\"><i class=\"fa fa-chevron-circle-right\"></i> Commencer</a>
+\t\t\t<a href=\"";
+        // line 11
+        echo $this->env->getExtension('routing')->getPath("bepushed");
+        echo "\" class=\"btn btn-cta\"><i class=\"fa fa-chevron-circle-right\"></i> Lancez votre projet !</a>
 \t\t</div>
 \t</header>
 \t";
@@ -138,6 +141,6 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
 
     public function getDebugInfo()
     {
-        return array (  121 => 53,  109 => 47,  103 => 44,  97 => 41,  87 => 34,  81 => 33,  74 => 29,  69 => 26,  65 => 25,  56 => 18,  53 => 17,  40 => 5,  37 => 4,  11 => 2,);
+        return array (  124 => 53,  112 => 47,  106 => 44,  100 => 41,  90 => 34,  84 => 33,  77 => 29,  72 => 26,  68 => 25,  59 => 18,  56 => 17,  48 => 11,  40 => 5,  37 => 4,  11 => 2,);
     }
 }

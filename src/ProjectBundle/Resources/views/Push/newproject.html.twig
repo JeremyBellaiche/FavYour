@@ -1,0 +1,82 @@
+{# src/ProjectBundle/Resources/views/Project/show.html.twig #}
+{% extends "::base.html.twig" %}
+
+	
+
+		
+	{% block body %}
+		<div class="container">
+			<div class="col-md-offset-2 col-md-8 log-theme">
+				<h2>Lancez votre projet</h2>
+				
+
+				<div class="col-md-offset-2 col-md-8 form-group">
+					<label class="control-label">Catégorie</label>
+					<select class="form-control">
+					  <option>Littérature</option>
+				      <option>Art</option>
+				      <option>Spectacle</option>
+				      <option>Photographie</option>
+				      <option>Mode</option>
+				      <option>Journalisme</option>
+				      <option>Education</option>
+				      <option>Ecologie</option>
+				      <option>Solidarité</option>
+				      <option>Aventure - Sport</option>
+				      <option>Design</option>
+				      <option>Invention</option>
+				      <option>Film</option>
+				      <option>Cuisine</option>
+				      <option>Jeux</option>
+				      <option>Projet perso</option>
+				      <option>Application</option>
+				      <option>Gadgets</option>
+				      <option>Film</option>
+				      <option>Cuisine</option>
+				      <option>Jeux</option>
+				      <option>Projet perso</option>
+				      <option>Application</option>
+				      <option>Gadgets</option>
+					</select>
+					
+
+					<label class="control-label">Titre</label>
+
+				    <input class="form-control" id="" type="text" placeholder="Titre de votre projet" >
+
+				    <label class="control-label">Photo du projet</label>
+					<div class="clearfix"></div>
+
+					<label class="control-label">Localisation</label>
+				    <div class="input-group">
+			          <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+			          <input type="text" class="form-control" id="inputGroupSuccess1" placeholder="Ville de réalisation du projet"aria-describedby="inputGroupSuccess1Status">
+			        </div>
+					
+
+					<label class="control-label">Durée</label>
+					<input class="form-control" id="" type="text" placeholder="Nombre de jours de la demande" >
+
+					
+					<div class="form-group">
+						<label class="control-label">Somme demandée</label>
+
+					    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+					    <div class="input-group">
+					      <div class="input-group-addon">€</div>
+					      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Somme demandée (en euros)">
+					    </div>
+					 </div>
+					
+
+					<label class="control-label">Description</label>
+
+					<textarea class="form-control" rows="3" placeholder="Decrivez votre projet en quelques lignes ..."></textarea>
+	
+					
+					<button class="btn btn-success">GO</button>
+				
+
+			</div>
+		</div>
+	{% endblock %}
