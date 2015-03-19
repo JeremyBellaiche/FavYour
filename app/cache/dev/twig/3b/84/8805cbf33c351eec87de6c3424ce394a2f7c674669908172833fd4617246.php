@@ -100,20 +100,57 @@ class __TwigTemplate_3b848805cbf33c351eec87de6c3424ce394a2f7c674669908172833fd46
                     </div>
                     <button type=\"submit\" class=\"btn btn-default\"> <i class=\"fa fa-search\"></i></button>
                 </form>
+            
 
-                <div class=\"navbar-form navbar-right\">
-                    <div class=\"form-group\">
-                        <a href=\"";
-        // line 69
-        echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
-        echo "\"><button type=\"button\" class=\"btn btn-success\">Connexion</button></a>
-                    
-                        <a href=\"";
-        // line 71
-        echo $this->env->getExtension('routing')->getPath("fos_user_registration_register");
-        echo "\"><button type=\"button\" class=\"btn btn-primary\">Inscription</button></a>
+                ";
+        // line 68
+        if ($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array())) {
+            // line 69
+            echo "                    <ul class=\"nav navbar-nav navbar-right\">
+                        <li id=\"fat-menu\" class=\"dropdown\">
+                          <a id=\"drop3\" href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" role=\"button\" aria-expanded=\"false\">
+                            ";
+            // line 72
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()), "username", array()), "html", null, true);
+            echo "
+                            <span class=\"caret\"></span>
+                          </a>
+                          <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"drop3\">
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Messagerie (1)</a></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Profile</a></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Projets Favoris</a></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Projets Pushed</a></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Projets lancés</a></li>
+                            <li role=\"presentation\" class=\"divider\"></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Paramètres</a></li>
+                            <li role=\"presentation\" class=\"divider\"></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"";
+            // line 84
+            echo $this->env->getExtension('routing')->getPath("fos_user_security_logout");
+            echo "\">Déconnecté</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                 ";
+        } else {
+            // line 89
+            echo "                    <div class=\"navbar-form navbar-right\">
+                        <div class=\"form-group\">
+                            <a href=\"";
+            // line 91
+            echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
+            echo "\"><button type=\"button\" class=\"btn btn-success\">Connexion</button></a>
+                        
+                            <a href=\"";
+            // line 93
+            echo $this->env->getExtension('routing')->getPath("fos_user_registration_register");
+            echo "\"><button type=\"button\" class=\"btn btn-primary\">Inscription</button></a>
+                        </div>
                     </div>
-                </div>
+                 ";
+        }
+        // line 97
+        echo "                
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -121,45 +158,94 @@ class __TwigTemplate_3b848805cbf33c351eec87de6c3424ce394a2f7c674669908172833fd46
     </nav>
     
     ";
-        // line 80
+        // line 104
         $this->displayBlock('header', $context, $blocks);
-        // line 82
+        // line 106
         echo "
     <div id=\"content\">
         ";
-        // line 84
+        // line 108
         $this->displayBlock('body', $context, $blocks);
-        // line 86
+        // line 110
         echo "    </div>
 
+    
+    <footer>
+        <div class=\"col-md-12 footer-swag\">
+            <div class=\"col-md-offset-1 col-md-10\">
+                <div class=\"col-md-3\">
+                    <h4>Navigation</h4>
+                    <ul class=\"list-unstyled\">
+                     <li>Index</li>
+                     <li>Push</li>
+                     <li>Be Pushed</li>
+                     <li>Connexion</li>
+                     <li>Inscription</li>
+                    </ul>
+                </div>
+
+                <div class=\"col-md-3\">
+                    <h4>Help</h4>
+                    <ul class=\"list-unstyled\">
+                     <li>Informations</li>
+                     <li>Mention legal</li>
+                     <li>FAQ</li>
+                     <li>Nous contacter</li>
+                    </ul>
+                </div>
+
+                <div class=\"col-md-3\">
+                    <h4>Catégories</h4>
+                    <ul class=\"list-unstyled\">
+                     <li>Sport</li>
+                     <li>Mode</li>
+                     <li>Technologie</li>
+                     <li>Humanitaire</li>
+                     <li>Entreprise</li>
+                    </ul>
+                </div>
+
+                <div class=\"col-md-3\">
+                    <h4>Auteurs</h4>
+                    <ul class=\"list-unstyled\">
+                     <li>Yannis Gil</li>
+                     <li>Salah Saiad</li>
+                     <li>Samuel Benichou</li>
+                     <li>Aroul Rattinassababady</li>
+                    </ul>
+                </div>
+
+            </div> 
+        </div>
+    </footer>
     <script src=\"https://code.jquery.com/jquery-1.11.2.js\"></script>
     <script src=\"";
-        // line 89
+        // line 162
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/vendor/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 90
+        // line 163
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 91
+        // line 164
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/main.js"), "html", null, true);
         echo "\"></script>
 </body>
 </html>";
     }
 
-    // line 80
+    // line 104
     public function block_header($context, array $blocks = array())
     {
-        // line 81
+        // line 105
         echo "    ";
     }
 
-    // line 84
+    // line 108
     public function block_body($context, array $blocks = array())
     {
-        // line 85
+        // line 109
         echo "        ";
     }
 
@@ -175,6 +261,6 @@ class __TwigTemplate_3b848805cbf33c351eec87de6c3424ce394a2f7c674669908172833fd46
 
     public function getDebugInfo()
     {
-        return array (  163 => 85,  160 => 84,  156 => 81,  153 => 80,  146 => 91,  142 => 90,  138 => 89,  133 => 86,  131 => 84,  127 => 82,  125 => 80,  113 => 71,  108 => 69,  92 => 56,  86 => 53,  74 => 46,  51 => 26,  40 => 18,  21 => 1,);
+        return array (  249 => 109,  246 => 108,  242 => 105,  239 => 104,  232 => 164,  228 => 163,  224 => 162,  170 => 110,  168 => 108,  164 => 106,  162 => 104,  153 => 97,  146 => 93,  141 => 91,  137 => 89,  129 => 84,  114 => 72,  109 => 69,  107 => 68,  92 => 56,  86 => 53,  74 => 46,  51 => 26,  40 => 18,  21 => 1,);
     }
 }

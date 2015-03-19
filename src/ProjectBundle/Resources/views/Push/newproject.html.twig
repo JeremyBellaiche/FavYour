@@ -10,7 +10,7 @@
 				<h2>Lancez votre projet</h2>
 				
 
-				<div class="col-md-offset-2 col-md-8 form-group">
+				<!--<div class="col-md-offset-2 col-md-8 form-group">
 					<label class="control-label">Catégorie</label>
 					<select class="form-control">
 					  <option>Littérature</option>
@@ -75,7 +75,15 @@
 	
 					
 					<button class="btn btn-success">GO</button>
-				
+				-->
+				{{ form_start(form, { 'attr': {'class': 'form-inline'} })  }}
+				<div class="form-group">
+		            <div class="col-md-12">
+		           		{{ form_widget(form)}}
+		            </div>
+		        </div>
+		        {{ form_end(form) }}
+
 
 			</div>
 		</div>

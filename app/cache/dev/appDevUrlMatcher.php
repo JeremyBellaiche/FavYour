@@ -161,6 +161,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::addAction',  '_route' => 'new-project',);
         }
 
+        // favoris
+        if ($pathinfo === '/favoris') {
+            return array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::favorisAction',  '_route' => 'favoris',);
+        }
+
         if (0 === strpos($pathinfo, '/log')) {
             if (0 === strpos($pathinfo, '/login')) {
                 // fos_user_security_login

@@ -1,67 +1,68 @@
 {# src/ProjectBundle/Resources/views/Project/show.html.twig #}
 {% extends "::base.html.twig" %}
 
+  {% block header %}
+  {% endblock %}
+
 	{% block body %}
 
-	<div class="col-md-1"></div>
-<div class="col-md-10">
-	<div>
-    <ul class="list-inline list-categories">
-      <li>Littérature</li>
-      <li>Art</li>
-      <li>Spectacle</li>
-      <li>Photographie</li>
-      <li>Mode</li>
-      <li>Journalisme</li>
-      <li>Education</li>
-      <li>Ecologie</li>
-      <li>Solidarité</li>
-      <li>Aventure - Sport</li>
-      <li>Design</li>
-      <li>Invention</li>
-      <li>Film</li>
-      <li>Cuisine</li>
-      <li>Jeux</li>
-      <li>Projet perso</li>
-      <li>Application</li>
-      <li>Gadgets</li>
-      <li>Film</li>
-      <li>Cuisine</li>
-      <li>Jeux</li>
-      <li>Projet perso</li>
-      <li>Application</li>
-      <li>Gadgets</li>
-    </ul>
-	</div>
-
-  <form action="#">
-    <input type="text" class="hidden" id="form-categories">
-
-  </form>
-
-
-  <div class="container">
-      <h2>Paramètres de vos recherches</h2>
-        <div class="col-md-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox">Afficher les projets du plus récent au plus ancien
-              </label>
-              <label>
-                <input type="checkbox">Afficher les projets par besoin de financement croissant
-              </label>
-              <label>
-                <input type="checkbox">Afficher les projets par besoin de financement décroissant
-              </label>
-            </div>
-          <div>
-            <button type="button" class="btn btn-warning">Rechercher !</button>
-          </div>
-        </div>
       
-  </div>
+      <div class="col-md-offset-1 col-md-10">
+      	<div>
+          <ul class="list-inline list-categories">
+            <li>Littérature</li>
+            <li>Art</li>
+            <li>Spectacle</li>
+            <li>Photographie</li>
+            <li>Mode</li>
+            <li>Journalisme</li>
+            <li>Education</li>
+            <li>Ecologie</li>
+            <li>Solidarité</li>
+            <li>Aventure - Sport</li>
+            <li>Design</li>
+            <li>Invention</li>
+            <li>Film</li>
+            <li>Cuisine</li>
+            <li>Jeux</li>
+            <li>Projet perso</li>
+            <li>Application</li>
+            <li>Gadgets</li>
+            <li>Film</li>
+            <li>Cuisine</li>
+            <li>Jeux</li>
+            <li>Projet perso</li>
+            <li>Application</li>
+            <li>Gadgets</li>
+          </ul>
+      	</div>
 
-</div>
+        <form action="#">
+          <input type="text" class="hidden" id="form-categories">
+
+        </form>
+
+
+            <h2>Paramètres de vos recherches</h2>
+              <div class="col-md-6">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox">Afficher les projets du plus récent au plus ancien
+                    </label>
+                    <label>
+                      <input type="checkbox">Afficher les projets par besoin de financement croissant
+                    </label>
+                    <label>
+                      <input type="checkbox">Afficher les projets par besoin de financement décroissant
+                    </label>
+                  </div>
+                <div>
+                  <button type="button" class="btn btn-warning">Rechercher !</button>
+                </div>
+              </div>
+            
+
+      </div>
 
 
 	{% endblock %}

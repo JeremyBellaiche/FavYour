@@ -308,4 +308,27 @@ class Project
     {
         return $this->image;
     }
+
+    /**
+     * Set amountWon
+     *
+     * @param integer $amountWon
+     * @return Project
+     */
+    public function setAmountWon($amountWon)
+    {
+        $this->amountWon = $amountWon;
+
+        return $this;
+    }
+
+    /**
+     * Get amountWon
+     *
+     * @return integer 
+     */
+    public function getAmountWon()
+    {
+        return $this->amountWon;
+    }
 }
