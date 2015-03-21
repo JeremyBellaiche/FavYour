@@ -2,7 +2,47 @@
 {% extends "::base.html.twig" %}
 
 	{% block body %}
-    {% for favori in favoris %}
+
+		<div class="col-md-12">
+			<div class="col-md-offset-2 col-md-8 log-theme">
+				<div class="text-center">
+					<h3>Projets favoris</h3>
+
+					{% for key, projet in projets %}
+					
+
+						<h1>{{projet.title|upper}}</h1>
+
+						{{projet.date|date('d/m/y')}}
+
+						{{key}}
+						{% set participants =''%}
+
+						{% for auteur in projet.auteurs %}
+							{% if auteur.createur %}
+							<p> Crée par ; {{auteur.username}}</p>
+
+							{% else %}
+
+								{% set participants = participants ~ auteur.username ~ ',' %}
+							{% endif %}		
+						{% endfor %}
+
+						avec la participations de {{participants}}
+						
+						
+						
+					
+							
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+
+
+
+	
+   {# {% for favori in favoris %}
     {{favori.id}}
-	{% endfor %}
+	{% endfor %}#}
 	{% endblock %}

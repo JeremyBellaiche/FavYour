@@ -118,7 +118,10 @@ class __TwigTemplate_3b848805cbf33c351eec87de6c3424ce394a2f7c674669908172833fd46
                           <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"drop3\">
                             <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Messagerie (1)</a></li>
                             <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Profile</a></li>
-                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Projets Favoris</a></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"";
+            // line 78
+            echo $this->env->getExtension('routing')->getPath("favoris");
+            echo "\">Projets Favoris</a></li>
                             <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Projets Pushed</a></li>
                             <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Projets lancés</a></li>
                             <li role=\"presentation\" class=\"divider\"></li>
@@ -261,6 +264,6 @@ class __TwigTemplate_3b848805cbf33c351eec87de6c3424ce394a2f7c674669908172833fd46
 
     public function getDebugInfo()
     {
-        return array (  249 => 109,  246 => 108,  242 => 105,  239 => 104,  232 => 164,  228 => 163,  224 => 162,  170 => 110,  168 => 108,  164 => 106,  162 => 104,  153 => 97,  146 => 93,  141 => 91,  137 => 89,  129 => 84,  114 => 72,  109 => 69,  107 => 68,  92 => 56,  86 => 53,  74 => 46,  51 => 26,  40 => 18,  21 => 1,);
+        return array (  252 => 109,  249 => 108,  245 => 105,  242 => 104,  235 => 164,  231 => 163,  227 => 162,  173 => 110,  171 => 108,  167 => 106,  165 => 104,  156 => 97,  149 => 93,  144 => 91,  140 => 89,  132 => 84,  123 => 78,  114 => 72,  109 => 69,  107 => 68,  92 => 56,  86 => 53,  74 => 46,  51 => 26,  40 => 18,  21 => 1,);
     }
 }

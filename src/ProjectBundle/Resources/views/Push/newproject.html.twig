@@ -1,90 +1,69 @@
-{# src/ProjectBundle/Resources/views/Project/show.html.twig #}
+	{# src/ProjectBundle/Resources/views/Project/show.html.twig #}
 {% extends "::base.html.twig" %}
 
 	
+				{% block body %}
+					<div class="container">
+						<div class="col-md-offset-2 col-md-8 log-theme">
+							<h2>Lancez votre projet</h2>
 
-		
-	{% block body %}
-		<div class="container">
-			<div class="col-md-offset-2 col-md-8 log-theme">
-				<h2>Lancez votre projet</h2>
-				
+								<div class="col-md-offset-1 col-md-10">
+									{{ form_start(form, { 'attr': {'class': ''} })  }}
 
-				<!--<div class="col-md-offset-2 col-md-8 form-group">
-					<label class="control-label">Catégorie</label>
-					<select class="form-control">
-					  <option>Littérature</option>
-				      <option>Art</option>
-				      <option>Spectacle</option>
-				      <option>Photographie</option>
-				      <option>Mode</option>
-				      <option>Journalisme</option>
-				      <option>Education</option>
-				      <option>Ecologie</option>
-				      <option>Solidarité</option>
-				      <option>Aventure - Sport</option>
-				      <option>Design</option>
-				      <option>Invention</option>
-				      <option>Film</option>
-				      <option>Cuisine</option>
-				      <option>Jeux</option>
-				      <option>Projet perso</option>
-				      <option>Application</option>
-				      <option>Gadgets</option>
-				      <option>Film</option>
-				      <option>Cuisine</option>
-				      <option>Jeux</option>
-				      <option>Projet perso</option>
-				      <option>Application</option>
-				      <option>Gadgets</option>
-					</select>
-					
 
-					<label class="control-label">Titre</label>
+						            <div class="form-group">
+										{{ form_label(form.categorie) }}
+										{{ form_widget(form.categorie,{'attr': {'class': 'form-control'}}) }}
+							      		{{ form_errors(form.categorie) }}
+									</div>
 
-				    <input class="form-control" id="" type="text" placeholder="Titre de votre projet" >
+									<div class="form-group">
+										{{ form_label(form.title, "Titre de l'annonce") }}
+										{{ form_widget(form.title,{'attr': {'class': 'form-control','placeholder' : "Titre de l'annonce"}}) }}
+							      		{{ form_errors(form.title) }}
+									</div>
 
-				    <label class="control-label">Photo du projet</label>
-					<div class="clearfix"></div>
+									<label class="control-label">Photo du projet</label>
+									<div class="clearfix"></div>
 
-					<label class="control-label">Localisation</label>
-				    <div class="input-group">
-			          <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-			          <input type="text" class="form-control" id="inputGroupSuccess1" placeholder="Ville de réalisation du projet"aria-describedby="inputGroupSuccess1Status">
-			        </div>
-					
+									<div class="form-group">
+										{{ form_label(form.location, "Localisation") }}
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+											{{ form_widget(form.location,{'attr': {'class': 'form-control','placeholder' : "Lieu de réalisation du projet"}}) }}
+										</div>
+							      		{{ form_errors(form.location) }}
+									</div>
 
-					<label class="control-label">Durée</label>
-					<input class="form-control" id="" type="text" placeholder="Nombre de jours de la demande" >
+									<div class="form-group">
+										{{ form_label(form.duree,"Durée") }}
+										{{ form_widget(form.duree,{'attr': {'class': 'form-control','placeholder' : "Durée de la quête de fond en jours"}}) }}
+							      		{{ form_errors(form.duree) }}
+									</div>
 
-					
-					<div class="form-group">
-						<label class="control-label">Somme demandée</label>
+									<div class="form-group">
+										{{ form_label(form.amountRequested,"Objectif") }}
+										<div class="input-group">
+									      	<div class="input-group-addon">€</div>
+											{{ form_widget(form.amountRequested,{'attr': {'class': 'form-control','placeholder' : "Somme nécessaire à la realisation du projet"}}) }}
+										</div>
+							      		{{ form_errors(form.amountRequested) }}
+									</div>
 
-					    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-					    <div class="input-group">
-					      <div class="input-group-addon">€</div>
-					      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Somme demandée (en euros)">
-					    </div>
-					 </div>
-					
+									<div class="form-group">
+										{{ form_label(form.description) }}
+										{{ form_widget(form.description,{'attr': {'class': 'form-control','placeholder' : "Attirez un maximum de pushers en donnant une description précise et attrayante de votre projet"}}) }}
+							      		{{ form_errors(form.description) }}
+									</div>
 
-					<label class="control-label">Description</label>
+						        <button type="submit" class="btn btn-success col-md-offset-4 col-md-4">Démarrer le projet !</button>
+					        </div>
 
-					<textarea class="form-control" rows="3" placeholder="Decrivez votre projet en quelques lignes ..."></textarea>
-	
-					
-					<button class="btn btn-success">GO</button>
-				-->
-				{{ form_start(form, { 'attr': {'class': 'form-inline'} })  }}
-				<div class="form-group">
-		            <div class="col-md-12">
-		           		{{ form_widget(form)}}
-		            </div>
-		        </div>
+
 		        {{ form_end(form) }}
-
 
 			</div>
 		</div>
 	{% endblock %}
+
+	

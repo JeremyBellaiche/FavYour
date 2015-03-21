@@ -5,89 +5,72 @@ namespace ProjectBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * project
- *
- * @ORM\Table(name="projects")
- * @ORM\Entity
+ * Project
  */
 class Project
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $categorie;
+
+    /**
+     * @var string
      */
     private $title;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="amount_requested", type="integer")
+     */
+    private $duree;
+
+    /**
+     * @var integer
      */
     private $amountRequested;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="amount_won", type="integer")
      */
     private $amountWon;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="end_date", type="datetime")
      */
     private $endDate;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="begin_date", type="datetime")
      */
     private $beginDate;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="location", type="string", length=255)
      */
     private $location;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="managers", type="text")
      */
     private $managers;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="homepage", type="integer", scale=1, options={"default" = 0})
      */
     private $homepage;
 
@@ -100,6 +83,29 @@ class Project
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param string $categorie
+     * @return Project
+     */
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return string 
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
     }
 
     /**
@@ -126,6 +132,29 @@ class Project
     }
 
     /**
+     * Set duree
+     *
+     * @param integer $duree
+     * @return Project
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree
+     *
+     * @return integer 
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+
+    /**
      * Set amountRequested
      *
      * @param integer $amountRequested
@@ -146,6 +175,29 @@ class Project
     public function getAmountRequested()
     {
         return $this->amountRequested;
+    }
+
+    /**
+     * Set amountWon
+     *
+     * @param integer $amountWon
+     * @return Project
+     */
+    public function setAmountWon($amountWon)
+    {
+        $this->amountWon = $amountWon;
+
+        return $this;
+    }
+
+    /**
+     * Get amountWon
+     *
+     * @return integer 
+     */
+    public function getAmountWon()
+    {
+        return $this->amountWon;
     }
 
     /**
@@ -264,29 +316,6 @@ class Project
     }
 
     /**
-     * Set homepage
-     *
-     * @param integer $homepage
-     * @return Project
-     */
-    public function setHomepage($homepage)
-    {
-        $this->homepage = $homepage;
-
-        return $this;
-    }
-
-    /**
-     * Get homepage
-     *
-     * @return integer 
-     */
-    public function getHomepage()
-    {
-        return $this->homepage;
-    }
-
-    /**
      * Set image
      *
      * @param string $image
@@ -310,25 +339,25 @@ class Project
     }
 
     /**
-     * Set amountWon
+     * Set homepage
      *
-     * @param integer $amountWon
+     * @param integer $homepage
      * @return Project
      */
-    public function setAmountWon($amountWon)
+    public function setHomepage($homepage)
     {
-        $this->amountWon = $amountWon;
+        $this->homepage = $homepage;
 
         return $this;
     }
 
     /**
-     * Get amountWon
+     * Get homepage
      *
      * @return integer 
      */
-    public function getAmountWon()
+    public function getHomepage()
     {
-        return $this->amountWon;
+        return $this->homepage;
     }
 }

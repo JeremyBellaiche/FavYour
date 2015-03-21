@@ -30,7 +30,25 @@ class ProjectController extends Controller
 
     public function addAction(Request $request){
 
-        $project = new Project();
+            $project = new Project();
+            $form = $this->get('form.factory')->create(new ProjectType(), $project);
+            
+            if($form -> handleRequest($request)->isValid()){
+                $em = $this -> getDoctrine() -> getManager(); 
+                $em -> persist($project);
+                $em -> flush();
+
+
+            return $this->redirect($this->generateUrl('homepage'));
+            }
+
+            return $this->render("ProjectBundle:Push:newproject.html.twig", array(
+                'form'  =>  $form->createView()));
+
+    }
+
+
+    /** $project = new Project();
 
         $form = $this->createForm(new ProjectType(), $project);
         $form->handleRequest($request);
@@ -44,8 +62,7 @@ class ProjectController extends Controller
 
         return $this->render("ProjectBundle:Push:newproject.html.twig", [
             'form'  =>  $form->createView()
-        ]);
-    }
+        ]);**/
 
     
     /**
@@ -53,13 +70,102 @@ class ProjectController extends Controller
     */
     public function favorisAction()
     {
-        $favoris = $this->getDoctrine()->getManager()
-                    ->getRepository('ProjectBundle:FavoritedProject')
-                    ->findByUserId($usr= $this->get('security.context')->getToken()->getUser()->getId(), array('id'=>'desc'));
+      // $favoris = $this->getDoctrine()->getManager()
+      //              ->getRepository('ProjectBundle:FavoritedProject')
+      //              ->findByUserId($usr= $this->get('security.context')->getToken()->getUser()->getId(), array('id'=>'desc'));
 
-        return $this->render('ProjectBundle:Back:favproject.html.twig',[
-            'favoris' => $favoris,
-        ]);
+        return $this->render('ProjectBundle:Back:favproject.html.twig', array(
+            'projets' => array(
+
+                array(
+
+                    'title' => "LOL titre",
+                    'auteurs'=> array (
+                        array(
+                        'username'=> "Yannis Gil",
+                        'id' => 1,
+                        'createur' => true,
+                        ),
+
+                        array(
+                        'username'=> "Mamadou",
+                        'id' => 2,
+                        'createur' => false,
+                        ),
+
+
+                        ),
+                    'description' => "Description du projet",
+                    'date' => new \dateTime(),
+                    ),
+
+                array(
+
+                    'title' => "LOL titre",
+                    'auteurs'=> array (
+                        array(
+                        'username'=> "Yannis Gil",
+                        'id' => 1,
+                        'createur' => true,
+                        ),
+
+                        array(
+                        'username'=> "Mamadou",
+                        'id' => 2,
+                        'createur' => false,
+                        ),
+
+
+                        ),
+                    'description' => "Description du projet",
+                    'date' => new \dateTime(),
+                    ),array(
+
+                    'title' => "LOL titre",
+                    'auteurs'=> array (
+                        array(
+                        'username'=> "Yannis Gil",
+                        'id' => 1,
+                        'createur' => true,
+                        ),
+
+                        array(
+                        'username'=> "Mamadou",
+                        'id' => 2,
+                        'createur' => false,
+                        ),
+
+
+                        ),
+                    'description' => "Description du projet",
+                    'date' => new \dateTime(),
+                    ),array(
+
+                    'title' => "LOL titre",
+                    'auteurs'=> array (
+                        array(
+                        'username'=> "Yannis Gil",
+                        'id' => 1,
+                        'createur' => true,
+                        ),
+
+                        array(
+                        'username'=> "Mamadou",
+                        'id' => 2,
+                        'createur' => false,
+                        ),
+
+
+                        ),
+                    'description' => "Description du projet",
+                    'date' => new \dateTime(),
+                    ),
+
+
+                ),
+
+
+        ));
     }
 
 

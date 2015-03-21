@@ -1,0 +1,42 @@
+ProjectBundle\Entity\Project:
+    type: entity
+    table: null
+    repositoryClass: ProjectBundle\Entity\ProjectRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        categorie:
+            type: string
+            length: 255
+        title:
+            type: string
+            length: 255
+        duree:
+            type: integer
+        amountRequested:
+            type: integer
+        amountWon:
+            type: integer
+        endDate:
+            type: datetime
+        beginDate:
+            type: datetime
+        location:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 255
+        managers:
+            type: string
+            length: 255
+        image:
+            type: string
+            length: 255
+        homepage:
+            type: integer
+    lifecycleCallbacks: {  }

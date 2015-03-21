@@ -1,8 +1,82 @@
 {% trans_default_domain 'FOSUserBundle' %}
+<div class="col-md-12">
+	<div class="col-md-offset-4 col-md-4 log-theme">
+		<h2>Inscription</h2>
 
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
-</form>
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+		<div class="contrainer">
+		  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+		    {# Les erreurs générales du formulaire. #}
+		    {{ form_errors(form) }}
+			
+			<div class="col-md-offset-1 col-md-10">
+
+					<div class="form-group">
+	                    <label for="username">Nom d'utilisateur</label>
+	                   
+						{{ form_widget(form.username,{'attr': {'class': 'form-control'}}) }}
+
+						<div class="clearfix"></div>
+						{# Affichage des erreurs pour ce champ précis.#}
+			  		    {{ form_errors(form.username) }}
+		  		    </div>
+					
+					<div class="form-group">
+			      		<label for="email">Adresse mail</label>
+						
+						{{ form_widget(form.email,{'attr': {'class': 'form-control'}}) }}
+						
+			      		<div class="clearfix"></div>
+			      		{{ form_errors(form.email) }}
+					</div>
+
+					<div class="form-group">
+						{{ form_label(form.plainPassword.first,"Mot de passe") }}
+						{{ form_widget(form.plainPassword.first,{'attr': {'class': 'form-control'}}) }}
+			      		{{ form_errors(form.plainPassword) }}
+					</div>
+
+					<div class="form-group">
+						<label for="second">Confirmation mot de passe</label>
+			      		{{ form_widget(form.plainPassword.second,{'attr': {'class': 'form-control'}}) }}
+			      		{{ form_errors(form.plainPassword) }}
+						
+					</div>
+		        
+		      	<div class="clearfix"></div>
+			
+
+		  {{form_rest(form)}}
+
+			<div class="form-group">
+				 {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+					<input type="submit" value="{{ 'Inscription'|trans }}" class='btn btn-success' />
+				  {# Génération automatique des champs pas encore écrits.
+				     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+				     et tous les champs cachés (type « hidden »). #}
+			</div>
+		  
+		  {# Fermeture de la balise <form> du formulaire HTML #}
+		  {{ form_end(form) }}
+
+
+
+		  <div class="clearfix"></div>
+    
+             <hr class="hr-colore">
+                <p>
+                  Déjà inscrit? <a href="{{path('fos_user_security_login')}}">Connectez vous !</a>
+                </p>
+
+                <hr class="hr-colore">
+
+          <a href="#" class="btn btn-primary btn-lg active margin-fb-btn" role="button">Connexion par Facebook</a>
+		</div>
+
+	
+		
+	</div>
+</div>
+
+
