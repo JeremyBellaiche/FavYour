@@ -8,6 +8,9 @@
 							<h2>Lancez votre projet</h2>
 
 								<div class="col-md-offset-1 col-md-10">
+
+									<h4 class="text-center">Informations</h4>
+
 									{{ form_start(form, { 'attr': {'class': ''} })  }}
 
 
@@ -16,6 +19,8 @@
 										{{ form_widget(form.categorie,{'attr': {'class': 'form-control'}}) }}
 							      		{{ form_errors(form.categorie) }}
 									</div>
+									
+									
 
 									<div class="form-group">
 										{{ form_label(form.title, "Titre de l'annonce") }}
@@ -37,7 +42,10 @@
 
 									<div class="form-group">
 										{{ form_label(form.duree,"Durée") }}
-										{{ form_widget(form.duree,{'attr': {'class': 'form-control','placeholder' : "Durée de la quête de fond en jours"}}) }}
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+											{{ form_widget(form.duree,{'attr': {'class': 'form-control','placeholder' : "Durée de la quête de fond en jours"}}) }}
+										</div>
 							      		{{ form_errors(form.duree) }}
 									</div>
 
@@ -52,9 +60,88 @@
 
 									<div class="form-group">
 										{{ form_label(form.description) }}
-										{{ form_widget(form.description,{'attr': {'class': 'form-control','placeholder' : "Attirez un maximum de pushers en donnant une description précise et attrayante de votre projet"}}) }}
+										{{ form_widget(form.description,{'attr': {'class': 'form-control','placeholder' : "Attirez un maximum de pushers en donnant une description précise et attrayante de votre projet",'rows':"10"}}) }}
 							      		{{ form_errors(form.description) }}
 									</div>
+
+									<hr>
+
+									<h4 class="text-center">Definissez maximum 5 récompenses</h4>
+
+									<div class="form-group">
+										{{ form_label(form.titreRecompense1,"Rang 1") }}
+										{{ form_widget(form.titreRecompense1,{'attr': {'class': 'form-control','placeholder' : "Titre des récompenses de rang 1"}}) }}
+							      		{{ form_errors(form.titreRecompense1) }}
+									</div>
+
+									<div class="form-group">
+										{{ form_widget(form.descriptionRecompense1,{'attr': {'class': 'form-control','placeholder' : "Description des récompenses de rang 1"}}) }}
+							      		{{ form_errors(form.descriptionRecompense1) }}
+									</div>
+
+
+
+									<div class="form-group">
+										{{ form_label(form.titreRecompense2,"Rang 2") }}
+										{{ form_widget(form.titreRecompense2,{'attr': {'class': 'form-control','placeholder' : "Titre des récompenses de rang 2"}}) }}
+							      		{{ form_errors(form.titreRecompense2) }}
+									</div>
+
+									<div class="form-group">
+										{{ form_widget(form.descriptionRecompense2,{'attr': {'class': 'form-control','placeholder' : "Description des récompenses de rang 2"}}) }}
+							      		{{ form_errors(form.descriptionRecompense2) }}
+									</div>
+
+
+
+									<div class="form-group">
+										{{ form_label(form.titreRecompense3,"Rang 3") }}
+										{{ form_widget(form.titreRecompense3,{'attr': {'class': 'form-control','placeholder' : "Titre des récompenses de rang 3"}}) }}
+							      		{{ form_errors(form.titreRecompense3) }}
+									</div>
+
+									<div class="form-group">
+										{{ form_widget(form.descriptionRecompense3,{'attr': {'class': 'form-control','placeholder' : "Description des récompenses de rang 3"}}) }}
+							      		{{ form_errors(form.descriptionRecompense3) }}
+									</div>
+
+
+
+
+									<div class="form-group">
+										{{ form_label(form.titreRecompense4,"Rang 4") }}
+										{{ form_widget(form.titreRecompense4,{'attr': {'class': 'form-control','placeholder' : "Titre des récompenses de rang 4"}}) }}
+							      		{{ form_errors(form.titreRecompense4) }}
+									</div>
+
+									<div class="form-group">
+										{{ form_widget(form.descriptionRecompense4,{'attr': {'class': 'form-control','placeholder' : "Description des récompenses de rang 4"}}) }}
+							      		{{ form_errors(form.descriptionRecompense4) }}
+									</div>
+
+
+
+
+									<div class="form-group">
+										{{ form_label(form.titreRecompense5,"Rang 5") }}
+										{{ form_widget(form.titreRecompense5,{'attr': {'class': 'form-control','placeholder' : "Titre des récompenses de rang 5"}}) }}
+							      		{{ form_errors(form.titreRecompense5) }}
+									</div>
+
+									<div class="form-group">
+										{{ form_widget(form.descriptionRecompense5,{'attr': {'class': 'form-control','placeholder' : "Description des récompenses de rang 5"}}) }}
+							      		{{ form_errors(form.descriptionRecompense5) }}
+									</div>
+
+									<hr>
+
+									<h4 class="text-center">Ajoutez des photos pour la gallerie</h4>
+
+								
+
+									<hr>
+
+									<h4 class="text-center">Ajoutez une vidéo présentant le projet</h4>
 
 						        <button type="submit" class="btn btn-success col-md-offset-4 col-md-4">Démarrer le projet !</button>
 					        </div>

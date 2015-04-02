@@ -3,40 +3,78 @@
 
 	{% block body %}
 
-		<div class="col-md-12">
-			<div class="col-md-offset-2 col-md-8 log-theme">
-				<div class="text-center">
-					<h3>Projets favoris</h3>
 
-					{% for key, projet in projets %}
-					
 
-						<h1>{{projet.title|upper}}</h1>
+		<div class="col-md-12">	
+			
+			{% if projets is empty %}
+				<h1>Vous n'avez pas encore de projets en favoris !</h1>
+			{% else %}
+				<div class="col-md-offset-2 col-md-8 log-theme-nopadding">
+						<h3 class="h1-padd">Projets favoris</h3>
 
-						{{projet.date|date('d/m/y')}}
+			{% for key, project in projets %}
 
-						{{key}}
-						{% set participants =''%}
 
-						{% for auteur in projet.auteurs %}
-							{% if auteur.createur %}
-							<p> Crée par ; {{auteur.username}}</p>
+				{% for key2, projet in project %}
+					{% set liste = [] %}
 
-							{% else %}
+							{% if projet.endDate | date('U') >= date().timestamp %}
+								{% set pair = key % 2 %}
+			
+								{% if pair == 0 %}
+									<section class="fav-gris">
+								{% else %}
+									<section class="fav-blanc">
+								{% endif %}
+										<div class="col-md-3 text-center pad-img-fav"><img class=" img-circle" src="{{ asset('uploads/documents/' ~ projet.path) }}" alt="" width="140" height="140"></div>
+										<div class="col-md-4">
+											<h4><a href="{{ path('project_show', {'id': projet.id}) }}">{{projet.title}}</a></h4>
+											<div class="clearfix"></div>
 
-								{% set participants = participants ~ auteur.username ~ ',' %}
-							{% endif %}		
-						{% endfor %}
+											<p>{{projet.description}}</p>
+										</div>
 
-						avec la participations de {{participants}}
-						
-						
-						
-					
-							
-					{% endfor %}
-				</div>
-			</div>
+
+										<div class="col-md-5">
+											<div class="col-md-12 margin-push-fav">
+												<h4>{{projet.pushers}} Pushers <i class="glyphicon glyphicon-thumbs-up"></i></h4>
+											</div>
+
+											<div class="col-md-12">
+												<h4>
+
+								            	{{ (projet.endDate | date('U') - date().timestamp ) | date('d') }} jours restants
+
+								            	<i class="glyphicon glyphicon-time"></i></h4>
+											</div>
+												
+											<div class="clearfix"></div>
+
+											<div class="col-md-12 margin-progr-fav">
+												<div class="progress bar-prog-index">
+											          {% set integer = projet.amountWon / projet.amountRequested * 100 %}
+											          <div class="progress-bar" role="progressbar" aria-valuenow="{{integer}}" aria-valuemin="0" aria-valuemax="100" style="width:{{integer}}%;">
+											            {{ integer | number_format(0) }}%
+											          </div>
+											    </div>
+											</div>
+
+
+											<div class="col-md-12">
+												<a href="{{ path("remove-favoris", { id: projet.id} ) }}"><button class="btn btn-warning margin-btn-fav-droite">Retirer des favoris</button></a>
+												<a href="{{ path('project_show', {'id': projet.id}) }}"><button class="btn btn-success">Voir le projet</button></a>
+											</div>
+										</div>
+
+									<div class="clearfix"></div>
+								</section>
+
+							{% endif %}
+				{% endfor %}
+			{% endfor %}
+
+		{% endif %}
 		</div>
 
 
@@ -46,3 +84,5 @@
     {{favori.id}}
 	{% endfor %}#}
 	{% endblock %}
+
+

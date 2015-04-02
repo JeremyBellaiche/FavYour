@@ -1,42 +1,132 @@
 ProjectBundle\Entity\Project:
     type: entity
-    table: null
-    repositoryClass: ProjectBundle\Entity\ProjectRepository
+    oneToOne:
+    cart:
+      targetEntity: Image
+      mappedBy: project
+    table: Project
     id:
         id:
             type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
             id: true
             generator:
-                strategy: AUTO
+                strategy: IDENTITY
     fields:
         categorie:
             type: string
+            nullable: false
             length: 255
+            fixed: false
+            comment: ''
         title:
             type: string
+            nullable: false
             length: 255
+            fixed: false
+            comment: ''
         duree:
             type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
         amountRequested:
             type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: amountRequested
         amountWon:
             type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+            column: amountWon
         endDate:
             type: datetime
+            nullable: true
+            comment: ''
+            column: endDate
         beginDate:
             type: datetime
+            nullable: true
+            comment: ''
+            column: beginDate
         location:
             type: string
+            nullable: false
             length: 255
+            fixed: false
+            comment: ''
         description:
-            type: string
-            length: 255
+            type: text
+            nullable: false
+            fixed: false
+            comment: ''
         managers:
             type: string
+            nullable: true
             length: 255
-        image:
-            type: string
-            length: 255
+            fixed: false
+            comment: ''
         homepage:
             type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+        author:
+            type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+        pushers:
+            type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+        titreRecompense1:
+            type: string
+            nullable: true
+            length: 255
+        descriptionRecompense1:
+            type: text
+            nullable: true
+        titreRecompense2:
+            type: string
+            nullable: true
+            length: 255
+        descriptionRecompense2:
+            type: text
+            nullable: true
+        titreRecompense3:
+            type: string
+            nullable: true
+            length: 255
+        descriptionRecompense3:
+            type: text
+            nullable: true
+        titreRecompense4:
+            type: string
+            nullable: true
+            length: 255
+        descriptionRecompense4:
+            type: text
+            nullable: true
+        titreRecompense5:
+            type: string
+            nullable: true
+            length: 255
+        descriptionRecompense5:
+            type: text
+            nullable: true
+        active:
+            type: integer
+            nullable: false
+        path:
+            type: string
+            nullable: true
+
+
     lifecycleCallbacks: {  }

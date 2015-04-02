@@ -20,6 +20,8 @@
       <parameter key="BaseBundle">BaseBundle\BaseBundle</parameter>
       <parameter key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</parameter>
       <parameter key="UserBundle">UserBundle\UserBundle</parameter>
+      <parameter key="MessageBundle">MessageBundle\MessageBundle</parameter>
+      <parameter key="FOSMessageBundle">FOS\MessageBundle\FOSMessageBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -621,6 +623,14 @@
       <parameter>ResetPassword</parameter>
       <parameter>Default</parameter>
     </parameter>
+    <parameter key="fos_message.message_meta_class">MessageBundle\Entity\MessageMetadata</parameter>
+    <parameter key="fos_message.thread_meta_class">MessageBundle\Entity\ThreadMetadata</parameter>
+    <parameter key="fos_message.message_class">MessageBundle\Entity\Message</parameter>
+    <parameter key="fos_message.thread_class">MessageBundle\Entity\Thread</parameter>
+    <parameter key="fos_message.new_thread_form.model">FOS\MessageBundle\FormModel\NewThreadMessage</parameter>
+    <parameter key="fos_message.new_thread_form.name">message</parameter>
+    <parameter key="fos_message.reply_form.model">FOS\MessageBundle\FormModel\ReplyMessage</parameter>
+    <parameter key="fos_message.reply_form.name">message</parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
     <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
@@ -2072,6 +2082,60 @@
         <argument>zh_CN</argument>
         <argument>validators</argument>
       </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.de.yml</argument>
+        <argument>de</argument>
+        <argument>FOSMessageBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.en.yml</argument>
+        <argument>en</argument>
+        <argument>FOSMessageBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.es.yml</argument>
+        <argument>es</argument>
+        <argument>FOSMessageBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.fr.yml</argument>
+        <argument>fr</argument>
+        <argument>FOSMessageBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.nl.yml</argument>
+        <argument>nl</argument>
+        <argument>FOSMessageBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.pl.yml</argument>
+        <argument>pl</argument>
+        <argument>FOSMessageBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.ru.yml</argument>
+        <argument>ru</argument>
+        <argument>FOSMessageBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.sl.yml</argument>
+        <argument>sl</argument>
+        <argument>FOSMessageBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.sv.yml</argument>
+        <argument>sv</argument>
+        <argument>FOSMessageBundle</argument>
+      </call>
     </service>
     <service id="translation.loader.php" class="Symfony\Component\Translation\Loader\PhpFileLoader">
       <tag name="translation.loader" alias="php"/>
@@ -2329,6 +2393,7 @@
               <argument key="fos_user_registration">fos_user.registration.form.type</argument>
               <argument key="fos_user_change_password">fos_user.change_password.form.type</argument>
               <argument key="fos_user_resetting">fos_user.resetting.form.type</argument>
+              <argument key="recipients_selector">fos_message.recipients_selector</argument>
             </argument>
             <argument type="collection">
               <argument key="form" type="collection">
@@ -2578,6 +2643,10 @@
               <argument key="Symfony\Component\Validator\Constraints\EmailValidator">validator.email</argument>
               <argument key="security.validator.user_password">security.validator.user_password</argument>
               <argument key="doctrine.orm.validator.unique">doctrine.orm.validator.unique</argument>
+              <argument key="fos_message.validator.authorization">fos_message.validator.authorization</argument>
+              <argument key="fos_message.validator.reply_authorization">fos_message.validator.reply_authorization</argument>
+              <argument key="fos_message.validator.spam">fos_message.validator.spam</argument>
+              <argument key="fos_message.validator.self_recipient">fos_message.validator.self_recipient</argument>
             </argument>
           </service>
         </argument>
@@ -2592,6 +2661,7 @@
         <argument type="collection">
           <argument>/Applications/MAMP/htdocs/FavYour/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/config/validation.xml</argument>
           <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/user-bundle/Resources/config/validation.xml</argument>
+          <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/config/validation.xml</argument>
         </argument>
       </call>
       <call method="enableAnnotationMapping">
@@ -3044,7 +3114,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>550c5b05261d8</argument>
+            <argument>551bf861d890c</argument>
           </service>
         </argument>
       </argument>
@@ -3332,7 +3402,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>550c5b05261d8</argument>
+            <argument>551bf861d890c</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -3581,6 +3651,9 @@
             <tag name="twig.extension"/>
           </service>
         </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="fos_message.twig_extension"/>
       </call>
       <call method="addExtension">
         <argument type="service">
@@ -3846,6 +3919,8 @@
             <argument type="collection">
               <argument key="ProjectBundle">ProjectBundle\Entity</argument>
               <argument key="UserBundle">UserBundle\Entity</argument>
+              <argument key="MessageBundle">MessageBundle\Entity</argument>
+              <argument key="FOSMessageBundle">FOS\MessageBundle\Entity</argument>
             </argument>
           </call>
           <call method="setMetadataCacheImpl">
@@ -3879,10 +3954,36 @@
                       <argument type="service" id="annotation_reader"/>
                       <argument type="collection">
                         <argument>/Applications/MAMP/htdocs/FavYour/src/UserBundle/Entity</argument>
+                        <argument>/Applications/MAMP/htdocs/FavYour/src/MessageBundle/Entity</argument>
                       </argument>
                     </service>
                   </argument>
                   <argument>UserBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                      <argument type="service" id="annotation_reader"/>
+                      <argument type="collection">
+                        <argument>/Applications/MAMP/htdocs/FavYour/src/UserBundle/Entity</argument>
+                        <argument>/Applications/MAMP/htdocs/FavYour/src/MessageBundle/Entity</argument>
+                      </argument>
+                    </service>
+                  </argument>
+                  <argument>MessageBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver" public="false">
+                      <argument type="collection">
+                        <argument key="/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/config/doctrine">FOS\MessageBundle\Entity</argument>
+                      </argument>
+                      <call method="setGlobalBasename">
+                        <argument>mapping</argument>
+                      </call>
+                    </service>
+                  </argument>
+                  <argument>FOS\MessageBundle\Entity</argument>
                 </call>
                 <call method="addDriver">
                   <argument type="service">
@@ -4007,11 +4108,10 @@
     </service>
     <service id="fos_user.username_form_type" class="FOS\UserBundle\Form\Type\UsernameFormType">
       <tag name="form.type" alias="fos_user_username"/>
-      <argument type="service">
-        <service class="FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer" public="false">
-          <argument type="service" id="fos_user.user_manager"/>
-        </service>
-      </argument>
+      <argument type="service" id="fos_user.user_to_username_transformer"/>
+    </service>
+    <service id="fos_user.user_to_username_transformer" class="FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer" public="false">
+      <argument type="service" id="fos_user.user_manager"/>
     </service>
     <service id="fos_user.profile.form.factory" class="FOS\UserBundle\Form\Factory\FormFactory">
       <argument type="service" id="form.factory"/>
@@ -4069,6 +4169,39 @@
       <tag name="kernel.event_subscriber"/>
       <argument type="service" id="router"/>
       <argument>86400</argument>
+    </service>
+    <service id="fos_message.search_query_factory.default" class="FOS\MessageBundle\Search\QueryFactory" scope="request">
+      <argument type="service" id="request"/>
+      <argument>q</argument>
+    </service>
+    <service id="fos_message.search_finder.default" class="FOS\MessageBundle\Search\Finder">
+      <argument type="service" id="fos_message.participant_provider"/>
+      <argument type="service" id="fos_message.thread_manager"/>
+    </service>
+    <service id="fos_message.recipients_selector" class="FOS\MessageBundle\FormType\RecipientsType">
+      <tag name="form.type" alias="recipients_selector"/>
+      <argument type="service">
+        <service class="FOS\MessageBundle\DataTransformer\RecipientsDataTransformer" public="false">
+          <argument type="service" id="fos_user.user_to_username_transformer"/>
+        </service>
+      </argument>
+    </service>
+    <service id="fos_message.validator.authorization" class="FOS\MessageBundle\Validator\AuthorizationValidator">
+      <tag name="validator.constraint_validator" alias="fos_message.validator.authorization"/>
+      <argument type="service" id="fos_message.authorizer"/>
+    </service>
+    <service id="fos_message.validator.reply_authorization" class="FOS\MessageBundle\Validator\ReplyAuthorizationValidator">
+      <tag name="validator.constraint_validator" alias="fos_message.validator.reply_authorization"/>
+      <argument type="service" id="fos_message.authorizer"/>
+      <argument type="service" id="fos_message.participant_provider"/>
+    </service>
+    <service id="fos_message.validator.spam" class="FOS\MessageBundle\Validator\SpamValidator" scope="request">
+      <tag name="validator.constraint_validator" alias="fos_message.validator.spam"/>
+      <argument type="service" id="fos_message.spam_detector"/>
+    </service>
+    <service id="fos_message.validator.self_recipient" class="FOS\MessageBundle\Validator\SelfRecipientValidator">
+      <tag name="validator.constraint_validator" alias="fos_message.validator.self_recipient"/>
+      <argument type="service" id="fos_message.participant_provider"/>
     </service>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
       <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig"/>
@@ -4450,6 +4583,14 @@
         <argument>User</argument>
       </call>
       <call method="addPath">
+        <argument>/Applications/MAMP/htdocs/FavYour/src/MessageBundle/Resources/views</argument>
+        <argument>Message</argument>
+      </call>
+      <call method="addPath">
+        <argument>/Applications/MAMP/htdocs/FavYour/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/views</argument>
+        <argument>FOSMessage</argument>
+      </call>
+      <call method="addPath">
         <argument>/Applications/MAMP/htdocs/FavYour/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
         <argument>Debug</argument>
       </call>
@@ -4571,6 +4712,87 @@
       </argument>
       <argument>UserBundle\Entity\User</argument>
     </service>
+    <service id="fos_message.message_manager" class="FOS\MessageBundle\EntityManager\MessageManager">
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <argument>MessageBundle\Entity\Message</argument>
+      <argument>MessageBundle\Entity\MessageMetadata</argument>
+    </service>
+    <service id="fos_message.thread_manager" class="FOS\MessageBundle\EntityManager\ThreadManager">
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <argument>MessageBundle\Entity\Thread</argument>
+      <argument>MessageBundle\Entity\ThreadMetadata</argument>
+      <argument type="service" id="fos_message.message_manager"/>
+    </service>
+    <service id="fos_message.sender" class="FOS\MessageBundle\Sender\Sender">
+      <argument type="service" id="fos_message.message_manager"/>
+      <argument type="service" id="fos_message.thread_manager"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+    </service>
+    <service id="fos_message.composer" class="FOS\MessageBundle\Composer\Composer">
+      <argument type="service" id="fos_message.message_manager"/>
+      <argument type="service" id="fos_message.thread_manager"/>
+    </service>
+    <service id="fos_message.provider" class="FOS\MessageBundle\Provider\Provider">
+      <argument type="service" id="fos_message.thread_manager"/>
+      <argument type="service" id="fos_message.message_manager"/>
+      <argument type="service" id="fos_message.thread_reader"/>
+      <argument type="service" id="fos_message.authorizer"/>
+      <argument type="service" id="fos_message.participant_provider"/>
+    </service>
+    <service id="fos_message.participant_provider" class="FOS\MessageBundle\Security\ParticipantProvider">
+      <argument type="service" id="security.context"/>
+    </service>
+    <service id="fos_message.authorizer" class="FOS\MessageBundle\Security\Authorizer">
+      <argument type="service" id="fos_message.participant_provider"/>
+    </service>
+    <service id="fos_message.message_reader" class="FOS\MessageBundle\Reader\Reader">
+      <argument type="service" id="fos_message.participant_provider"/>
+      <argument type="service" id="fos_message.message_manager"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+    </service>
+    <service id="fos_message.thread_reader" class="FOS\MessageBundle\Reader\Reader">
+      <argument type="service" id="fos_message.participant_provider"/>
+      <argument type="service" id="fos_message.thread_manager"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+    </service>
+    <service id="fos_message.deleter" class="FOS\MessageBundle\Deleter\Deleter">
+      <argument type="service" id="fos_message.authorizer"/>
+      <argument type="service" id="fos_message.participant_provider"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+    </service>
+    <service id="fos_message.spam_detector" class="FOS\MessageBundle\SpamDetection\NoopSpamDetector"/>
+    <service id="fos_message.twig_extension" class="FOS\MessageBundle\Twig\Extension\MessageExtension">
+      <tag name="twig.extension" alias="fos_message"/>
+      <argument type="service" id="fos_message.participant_provider"/>
+      <argument type="service" id="fos_message.provider"/>
+      <argument type="service" id="fos_message.authorizer"/>
+    </service>
+    <service id="fos_message.new_thread_form.type" class="FOS\MessageBundle\FormType\NewThreadMessageFormType"/>
+    <service id="fos_message.new_thread_form.factory" class="FOS\MessageBundle\FormFactory\NewThreadMessageFormFactory">
+      <argument type="service" id="form.factory"/>
+      <argument type="service" id="fos_message.new_thread_form.type"/>
+      <argument>message</argument>
+      <argument>FOS\MessageBundle\FormModel\NewThreadMessage</argument>
+    </service>
+    <service id="fos_message.new_thread_form.handler" class="FOS\MessageBundle\FormHandler\NewThreadMessageFormHandler" scope="request">
+      <argument type="service" id="request"/>
+      <argument type="service" id="fos_message.composer"/>
+      <argument type="service" id="fos_message.sender"/>
+      <argument type="service" id="fos_message.participant_provider"/>
+    </service>
+    <service id="fos_message.reply_form.type" class="FOS\MessageBundle\FormType\ReplyMessageFormType"/>
+    <service id="fos_message.reply_form.factory" class="FOS\MessageBundle\FormFactory\ReplyMessageFormFactory">
+      <argument type="service" id="form.factory"/>
+      <argument type="service" id="fos_message.reply_form.type"/>
+      <argument>message</argument>
+      <argument>FOS\MessageBundle\FormModel\ReplyMessage</argument>
+    </service>
+    <service id="fos_message.reply_form.handler" class="FOS\MessageBundle\FormHandler\ReplyMessageFormHandler" scope="request">
+      <argument type="service" id="request"/>
+      <argument type="service" id="fos_message.composer"/>
+      <argument type="service" id="fos_message.sender"/>
+      <argument type="service" id="fos_message.participant_provider"/>
+    </service>
     <service id="session.storage" alias="session.storage.native"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher"/>
     <service id="debug.templating.engine.twig" alias="templating"/>
@@ -4586,6 +4808,8 @@
     <service id="doctrine.orm.default_result_cache" alias="doctrine_cache.providers.doctrine.orm.default_result_cache"/>
     <service id="doctrine.orm.default_query_cache" alias="doctrine_cache.providers.doctrine.orm.default_query_cache"/>
     <service id="fos_user.util.username_canonicalizer" alias="fos_user.util.email_canonicalizer"/>
+    <service id="fos_message.search_query_factory" alias="fos_message.search_query_factory.default"/>
+    <service id="fos_message.search_finder" alias="fos_message.search_finder.default"/>
     <service id="sensio.distribution.webconfigurator" alias="sensio_distribution.webconfigurator"/>
     <service id="console.command.sensiolabs_security_command_securitycheckercommand" alias="sensio_distribution.security_checker.command"/>
   </services>

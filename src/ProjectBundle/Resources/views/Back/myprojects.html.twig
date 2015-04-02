@@ -1,0 +1,159 @@
+{# src/ProjectBundle/Resources/views/Project/favproject.html.twig #}
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+	
+
+
+
+	<div class="col-md-12">
+		<div class="col-md-offset-1 col-md-10">
+
+			{% if Projects == null %}
+				<h1 class="padd-h1-my"> Vous n'avez pas encore de projet</h1>
+			{% else %}
+				<h1>Mes projets</h1>
+			
+
+			<div class="bs-example" data-example-id="striped-table">
+			    <div class="table-responsive padd-tab-my">
+			      <table class="table">
+			        <thead>
+			          <tr>
+			            <th></th>
+			            <th>Titre</th>
+			            <th>Jours restants</th>
+			            <th>Somme recoltée</th>
+			            <th></th>
+
+			        </thead>
+			        <tbody>
+
+		        	{% for Project in Projects %}
+
+		        		{% if Project.active == 0 %}
+							<tr class="danger">
+						{% else %}
+				            <tr>
+					      {% endif %}
+
+			          
+			            <th scope="row">{{Project.id}}</th>
+
+
+
+			            <td>
+			            	<a href="" data-toggle="modal" data-target="#stat-{{Project.id}}">{{Project.title}}</a>							
+			            </td>
+						
+
+
+			            <td>
+			            	{% if Project.endDate | date('U') >= date().timestamp %}
+			            	{{ (Project.endDate | date('U') - date().timestamp ) | date('d') }} jours restants
+			            	{% else %}
+			            	Projet terminé le {{ Project.endDate | date('d-m-Y') }}
+			            	{% endif %}
+			            </td>
+			            <td>{{ Project.amountWon}} / {{ Project.amountRequested}}€ </td>
+				            
+
+						{% if Project.active == 0 %}
+							<td>
+								Projet supprimé
+							</td>
+						{% else %}
+				            <td>
+				            	<a href="{{ path('edit', {'id': Project.id}) }}">
+				            		<i class="glyphicon glyphicon-pencil" title="Edit">
+				            			
+				            		</i></a>
+
+
+
+
+				    
+				            	<a href="" data-toggle="modal" data-target="#delete-{{Project.id}}"><i class="glyphicon glyphicon-remove redcross" title="Supprimer"></i></a>
+				            		<!-- Button trigger modal -->
+					        </td>
+					      {% endif %}
+			          </tr>
+
+
+
+					<div class="modal fade" id="edit-{{Project.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							        <h4 class="modal-title" id="myModalLabel">Modifier "{{Project.title}}"</h4>
+							      </div>
+							      <div class="modal-body">
+
+							        <div class="form-group">
+									    <label for="title">Titre</label>
+									    <input type="text" class="form-control" id="title" value="{{Project.title}}">
+									</div>
+									<div class="form-group">
+									    <label for="mail">Adresse mail</label>
+									    <input type="text" class="form-control" id="mail" placeholder="d.jane@gmail.com">
+									</div>
+
+									<div class="form-group">
+									    <label for="password">Nouveau mot de passe</label>
+									    <input type="text" class="form-control" id="password" placeholder="Nouveau mot de passe">
+									</div>
+
+									<div class="form-group">
+									    <label for="passwordConfirm">Confirmation mot de passe</label>
+									    <input type="text" class="form-control" id="passwordConfirm" placeholder="Confirmer le nouveau mot de passe">
+									</div>
+
+
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							        <button type="button" class="btn btn-primary">Save changes</button>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+
+
+
+
+
+
+								<div class="modal fade" id="delete-{{Project.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								  <div class="modal-dialog">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								        <h4 class="modal-title" id="myModalLabel">{{Project.title}}</h4>
+								      </div>
+								      <div class="modal-body">
+								        Etes-vous sûr de vouloir supprimer ce projet ? 
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+								        <a href="{{ path("desactive", { id: Project.id} ) }}"><button type="button" class="btn btn-danger">Supprimer le projet</button></a>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+			            	
+
+
+
+					{% endfor %} 
+
+			        </tbody>
+			      </table>
+			    </div>
+			  </div>
+			{% endif %}
+		</div>
+	</div>
+
+{% endblock %}

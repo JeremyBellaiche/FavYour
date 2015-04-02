@@ -60,7 +60,7 @@ class FavoritedProject
      * @param \integer $userId
      * @return FavoritedProject
      */
-    public function setUserId(\integer $userId)
+    public function setUserId($userId)
     {
         $this->userId = $userId;
 

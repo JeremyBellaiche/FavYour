@@ -132,6 +132,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_homepage')), array (  '_controller' => 'UserBundle\\Controller\\DefaultController::indexAction',));
         }
 
+        // config
+        if ($pathinfo === '/config') {
+            return array (  '_controller' => 'UserBundle\\Controller\\DefaultController::paramAction',  '_route' => 'config',);
+        }
+
         // homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
@@ -156,6 +161,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'project_show')), array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::showAction',));
         }
 
+        // edit
+        if (0 === strpos($pathinfo, '/edit') && preg_match('#^/edit/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'edit')), array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::editAction',));
+        }
+
         // new-project
         if ($pathinfo === '/new-project') {
             return array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::addAction',  '_route' => 'new-project',);
@@ -164,6 +174,26 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // favoris
         if ($pathinfo === '/favoris') {
             return array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::favorisAction',  '_route' => 'favoris',);
+        }
+
+        // myprojects
+        if ($pathinfo === '/myprojects') {
+            return array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::myprojectsAction',  '_route' => 'myprojects',);
+        }
+
+        // desactive
+        if (0 === strpos($pathinfo, '/desactive') && preg_match('#^/desactive/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'desactive')), array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::desactiveAction',));
+        }
+
+        // ajouter-favoris
+        if (0 === strpos($pathinfo, '/ajouter-favoris') && preg_match('#^/ajouter\\-favoris/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'ajouter-favoris')), array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::ajouterFavorisAction',));
+        }
+
+        // remove-favoris
+        if (0 === strpos($pathinfo, '/remove-favoris') && preg_match('#^/remove\\-favoris/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'remove-favoris')), array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::removeFavorisAction',));
         }
 
         if (0 === strpos($pathinfo, '/log')) {
@@ -327,6 +357,70 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'FOS\\UserBundle\\Controller\\ChangePasswordController::changePasswordAction',  '_route' => 'fos_user_change_password',);
         }
         not_fos_user_change_password:
+
+        if (0 === strpos($pathinfo, '/inbox')) {
+            // fos_message_inbox
+            if (rtrim($pathinfo, '/') === '/inbox') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'fos_message_inbox');
+                }
+
+                return array (  '_controller' => 'FOS\\MessageBundle\\Controller\\MessageController::inboxAction',  '_route' => 'fos_message_inbox',);
+            }
+
+            // fos_message_sent
+            if ($pathinfo === '/inbox/sent') {
+                return array (  '_controller' => 'FOS\\MessageBundle\\Controller\\MessageController::sentAction',  '_route' => 'fos_message_sent',);
+            }
+
+            // fos_message_deleted
+            if ($pathinfo === '/inbox/deleted') {
+                return array (  '_controller' => 'FOS\\MessageBundle\\Controller\\MessageController::deletedAction',  '_route' => 'fos_message_deleted',);
+            }
+
+            // fos_message_search
+            if ($pathinfo === '/inbox/search') {
+                return array (  '_controller' => 'FOS\\MessageBundle\\Controller\\MessageController::searchAction',  '_route' => 'fos_message_search',);
+            }
+
+            // fos_message_thread_new
+            if ($pathinfo === '/inbox/new') {
+                return array (  '_controller' => 'FOS\\MessageBundle\\Controller\\MessageController::newThreadAction',  '_route' => 'fos_message_thread_new',);
+            }
+
+            // fos_message_thread_delete
+            if (preg_match('#^/inbox/(?P<threadId>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                    $allow = array_merge($allow, array('POST', 'DELETE'));
+                    goto not_fos_message_thread_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'fos_message_thread_delete')), array (  '_controller' => 'FOS\\MessageBundle\\Controller\\MessageController::deleteAction',));
+            }
+            not_fos_message_thread_delete:
+
+            // fos_message_thread_undelete
+            if (preg_match('#^/inbox/(?P<threadId>[^/]++)/undelete$#s', $pathinfo, $matches)) {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_fos_message_thread_undelete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'fos_message_thread_undelete')), array (  '_controller' => 'FOS\\MessageBundle\\Controller\\MessageController::undeleteAction',));
+            }
+            not_fos_message_thread_undelete:
+
+            // fos_message_thread_view
+            if (preg_match('#^/inbox/(?P<threadId>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'fos_message_thread_view')), array (  '_controller' => 'FOS\\MessageBundle\\Controller\\MessageController::threadAction',));
+            }
+
+        }
+
+        // profil_show
+        if (0 === strpos($pathinfo, '/profil') && preg_match('#^/profil/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'profil_show')), array (  '_controller' => 'UserBundle\\Controller\\DefaultController::showAction',));
+        }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }

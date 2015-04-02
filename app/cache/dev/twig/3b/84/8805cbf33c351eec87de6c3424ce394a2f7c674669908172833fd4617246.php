@@ -116,21 +116,30 @@ class __TwigTemplate_3b848805cbf33c351eec87de6c3424ce394a2f7c674669908172833fd46
                             <span class=\"caret\"></span>
                           </a>
                           <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"drop3\">
-                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Messagerie (1)</a></li>
-                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Profile</a></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"\">Messagerie (1)</a></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"";
+            // line 77
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("profil_show", array("id" => $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()), "id", array()))), "html", null, true);
+            echo "\">Profile</a></li>
                             <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"";
             // line 78
             echo $this->env->getExtension('routing')->getPath("favoris");
             echo "\">Projets Favoris</a></li>
-                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Projets Pushed</a></li>
-                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Projets lancés</a></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"\">Projets pushed</a></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"";
+            // line 80
+            echo $this->env->getExtension('routing')->getPath("myprojects");
+            echo "\">Mes projets</a></li>
                             <li role=\"presentation\" class=\"divider\"></li>
-                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"https://twitter.com/fat\">Paramètres</a></li>
+                            <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"";
+            // line 82
+            echo $this->env->getExtension('routing')->getPath("config");
+            echo "\">Paramètres</a></li>
                             <li role=\"presentation\" class=\"divider\"></li>
                             <li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"";
             // line 84
             echo $this->env->getExtension('routing')->getPath("fos_user_security_logout");
-            echo "\">Déconnecté</a></li>
+            echo "\">Déconnexion</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -264,6 +273,6 @@ class __TwigTemplate_3b848805cbf33c351eec87de6c3424ce394a2f7c674669908172833fd46
 
     public function getDebugInfo()
     {
-        return array (  252 => 109,  249 => 108,  245 => 105,  242 => 104,  235 => 164,  231 => 163,  227 => 162,  173 => 110,  171 => 108,  167 => 106,  165 => 104,  156 => 97,  149 => 93,  144 => 91,  140 => 89,  132 => 84,  123 => 78,  114 => 72,  109 => 69,  107 => 68,  92 => 56,  86 => 53,  74 => 46,  51 => 26,  40 => 18,  21 => 1,);
+        return array (  261 => 109,  258 => 108,  254 => 105,  251 => 104,  244 => 164,  240 => 163,  236 => 162,  182 => 110,  180 => 108,  176 => 106,  174 => 104,  165 => 97,  158 => 93,  153 => 91,  149 => 89,  141 => 84,  136 => 82,  131 => 80,  126 => 78,  122 => 77,  114 => 72,  109 => 69,  107 => 68,  92 => 56,  86 => 53,  74 => 46,  51 => 26,  40 => 18,  21 => 1,);
     }
 }

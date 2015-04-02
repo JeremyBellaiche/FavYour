@@ -118,6 +118,31 @@ class appDevDebugProjectContainer extends Container
             'form.type_extension.submit.validator' => 'getForm_TypeExtension_Submit_ValidatorService',
             'form.type_guesser.doctrine' => 'getForm_TypeGuesser_DoctrineService',
             'form.type_guesser.validator' => 'getForm_TypeGuesser_ValidatorService',
+            'fos_message.authorizer' => 'getFosMessage_AuthorizerService',
+            'fos_message.composer' => 'getFosMessage_ComposerService',
+            'fos_message.deleter' => 'getFosMessage_DeleterService',
+            'fos_message.message_manager' => 'getFosMessage_MessageManagerService',
+            'fos_message.message_reader' => 'getFosMessage_MessageReaderService',
+            'fos_message.new_thread_form.factory' => 'getFosMessage_NewThreadForm_FactoryService',
+            'fos_message.new_thread_form.handler' => 'getFosMessage_NewThreadForm_HandlerService',
+            'fos_message.new_thread_form.type' => 'getFosMessage_NewThreadForm_TypeService',
+            'fos_message.participant_provider' => 'getFosMessage_ParticipantProviderService',
+            'fos_message.provider' => 'getFosMessage_ProviderService',
+            'fos_message.recipients_selector' => 'getFosMessage_RecipientsSelectorService',
+            'fos_message.reply_form.factory' => 'getFosMessage_ReplyForm_FactoryService',
+            'fos_message.reply_form.handler' => 'getFosMessage_ReplyForm_HandlerService',
+            'fos_message.reply_form.type' => 'getFosMessage_ReplyForm_TypeService',
+            'fos_message.search_finder.default' => 'getFosMessage_SearchFinder_DefaultService',
+            'fos_message.search_query_factory.default' => 'getFosMessage_SearchQueryFactory_DefaultService',
+            'fos_message.sender' => 'getFosMessage_SenderService',
+            'fos_message.spam_detector' => 'getFosMessage_SpamDetectorService',
+            'fos_message.thread_manager' => 'getFosMessage_ThreadManagerService',
+            'fos_message.thread_reader' => 'getFosMessage_ThreadReaderService',
+            'fos_message.twig_extension' => 'getFosMessage_TwigExtensionService',
+            'fos_message.validator.authorization' => 'getFosMessage_Validator_AuthorizationService',
+            'fos_message.validator.reply_authorization' => 'getFosMessage_Validator_ReplyAuthorizationService',
+            'fos_message.validator.self_recipient' => 'getFosMessage_Validator_SelfRecipientService',
+            'fos_message.validator.spam' => 'getFosMessage_Validator_SpamService',
             'fos_user.change_password.form.factory' => 'getFosUser_ChangePassword_Form_FactoryService',
             'fos_user.change_password.form.type' => 'getFosUser_ChangePassword_Form_TypeService',
             'fos_user.listener.authentication' => 'getFosUser_Listener_AuthenticationService',
@@ -134,6 +159,7 @@ class appDevDebugProjectContainer extends Container
             'fos_user.security.login_manager' => 'getFosUser_Security_LoginManagerService',
             'fos_user.user_manager' => 'getFosUser_UserManagerService',
             'fos_user.user_provider.username' => 'getFosUser_UserProvider_UsernameService',
+            'fos_user.user_to_username_transformer' => 'getFosUser_UserToUsernameTransformerService',
             'fos_user.username_form_type' => 'getFosUser_UsernameFormTypeService',
             'fos_user.util.email_canonicalizer' => 'getFosUser_Util_EmailCanonicalizerService',
             'fos_user.util.token_generator' => 'getFosUser_Util_TokenGeneratorService',
@@ -292,6 +318,8 @@ class appDevDebugProjectContainer extends Container
             'doctrine.orm.default_result_cache' => 'doctrine_cache.providers.doctrine.orm.default_result_cache',
             'doctrine.orm.entity_manager' => 'doctrine.orm.default_entity_manager',
             'event_dispatcher' => 'debug.event_dispatcher',
+            'fos_message.search_finder' => 'fos_message.search_finder.default',
+            'fos_message.search_query_factory' => 'fos_message.search_query_factory.default',
             'fos_user.util.username_canonicalizer' => 'fos_user.util.email_canonicalizer',
             'mailer' => 'swiftmailer.mailer.default',
             'sensio.distribution.webconfigurator' => 'sensio_distribution.webconfigurator',
@@ -675,29 +703,38 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        $a = new \Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver(array(($this->targetDirs[3].'/src/ProjectBundle/Resources/config/doctrine') => 'ProjectBundle\\Entity'));
-        $a->setGlobalBasename('mapping');
+        $a = $this->get('annotation_reader');
 
-        $b = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
-        $b->addDriver($a, 'ProjectBundle\\Entity');
-        $b->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => ($this->targetDirs[3].'/src/UserBundle/Entity'))), 'UserBundle\\Entity');
-        $b->addDriver(new \Doctrine\ORM\Mapping\Driver\XmlDriver(new \Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator(array(($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/config/doctrine/model') => 'FOS\\UserBundle\\Model'), '.orm.xml')), 'FOS\\UserBundle\\Model');
+        $b = new \Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver(array(($this->targetDirs[3].'/src/ProjectBundle/Resources/config/doctrine') => 'ProjectBundle\\Entity'));
+        $b->setGlobalBasename('mapping');
 
-        $c = new \Doctrine\ORM\Configuration();
-        $c->setEntityNamespaces(array('ProjectBundle' => 'ProjectBundle\\Entity', 'UserBundle' => 'UserBundle\\Entity'));
-        $c->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_metadata_cache'));
-        $c->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_query_cache'));
-        $c->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_result_cache'));
-        $c->setMetadataDriverImpl($b);
-        $c->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
-        $c->setProxyNamespace('Proxies');
-        $c->setAutoGenerateProxyClasses(true);
-        $c->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $c->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $c->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
-        $c->setEntityListenerResolver($this->get('doctrine.orm.default_entity_listener_resolver'));
+        $c = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => ($this->targetDirs[3].'/src/UserBundle/Entity'), 1 => ($this->targetDirs[3].'/src/MessageBundle/Entity')));
 
-        $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $c);
+        $d = new \Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver(array(($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/config/doctrine') => 'FOS\\MessageBundle\\Entity'));
+        $d->setGlobalBasename('mapping');
+
+        $e = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
+        $e->addDriver($b, 'ProjectBundle\\Entity');
+        $e->addDriver($c, 'UserBundle\\Entity');
+        $e->addDriver($c, 'MessageBundle\\Entity');
+        $e->addDriver($d, 'FOS\\MessageBundle\\Entity');
+        $e->addDriver(new \Doctrine\ORM\Mapping\Driver\XmlDriver(new \Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator(array(($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/config/doctrine/model') => 'FOS\\UserBundle\\Model'), '.orm.xml')), 'FOS\\UserBundle\\Model');
+
+        $f = new \Doctrine\ORM\Configuration();
+        $f->setEntityNamespaces(array('ProjectBundle' => 'ProjectBundle\\Entity', 'UserBundle' => 'UserBundle\\Entity', 'MessageBundle' => 'MessageBundle\\Entity', 'FOSMessageBundle' => 'FOS\\MessageBundle\\Entity'));
+        $f->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_metadata_cache'));
+        $f->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_query_cache'));
+        $f->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_result_cache'));
+        $f->setMetadataDriverImpl($e);
+        $f->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
+        $f->setProxyNamespace('Proxies');
+        $f->setAutoGenerateProxyClasses(true);
+        $f->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $f->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $f->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+        $f->setEntityListenerResolver($this->get('doctrine.orm.default_entity_listener_resolver'));
+
+        $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $f);
 
         $this->get('doctrine.orm.default_manager_configurator')->configure($instance);
 
@@ -856,7 +893,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getForm_RegistryService()
     {
-        return $this->services['form.registry'] = new \Symfony\Component\Form\FormRegistry(array(0 => new \Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension($this, array('form' => 'form.type.form', 'birthday' => 'form.type.birthday', 'checkbox' => 'form.type.checkbox', 'choice' => 'form.type.choice', 'collection' => 'form.type.collection', 'country' => 'form.type.country', 'date' => 'form.type.date', 'datetime' => 'form.type.datetime', 'email' => 'form.type.email', 'file' => 'form.type.file', 'hidden' => 'form.type.hidden', 'integer' => 'form.type.integer', 'language' => 'form.type.language', 'locale' => 'form.type.locale', 'money' => 'form.type.money', 'number' => 'form.type.number', 'password' => 'form.type.password', 'percent' => 'form.type.percent', 'radio' => 'form.type.radio', 'repeated' => 'form.type.repeated', 'search' => 'form.type.search', 'textarea' => 'form.type.textarea', 'text' => 'form.type.text', 'time' => 'form.type.time', 'timezone' => 'form.type.timezone', 'url' => 'form.type.url', 'button' => 'form.type.button', 'submit' => 'form.type.submit', 'reset' => 'form.type.reset', 'currency' => 'form.type.currency', 'entity' => 'form.type.entity', 'fos_user_username' => 'fos_user.username_form_type', 'fos_user_profile' => 'fos_user.profile.form.type', 'fos_user_registration' => 'fos_user.registration.form.type', 'fos_user_change_password' => 'fos_user.change_password.form.type', 'fos_user_resetting' => 'fos_user.resetting.form.type'), array('form' => array(0 => 'form.type_extension.form.http_foundation', 1 => 'form.type_extension.form.validator', 2 => 'form.type_extension.csrf', 3 => 'form.type_extension.form.data_collector'), 'repeated' => array(0 => 'form.type_extension.repeated.validator'), 'submit' => array(0 => 'form.type_extension.submit.validator')), array(0 => 'form.type_guesser.validator', 1 => 'form.type_guesser.doctrine'))), $this->get('form.resolved_type_factory'));
+        return $this->services['form.registry'] = new \Symfony\Component\Form\FormRegistry(array(0 => new \Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension($this, array('form' => 'form.type.form', 'birthday' => 'form.type.birthday', 'checkbox' => 'form.type.checkbox', 'choice' => 'form.type.choice', 'collection' => 'form.type.collection', 'country' => 'form.type.country', 'date' => 'form.type.date', 'datetime' => 'form.type.datetime', 'email' => 'form.type.email', 'file' => 'form.type.file', 'hidden' => 'form.type.hidden', 'integer' => 'form.type.integer', 'language' => 'form.type.language', 'locale' => 'form.type.locale', 'money' => 'form.type.money', 'number' => 'form.type.number', 'password' => 'form.type.password', 'percent' => 'form.type.percent', 'radio' => 'form.type.radio', 'repeated' => 'form.type.repeated', 'search' => 'form.type.search', 'textarea' => 'form.type.textarea', 'text' => 'form.type.text', 'time' => 'form.type.time', 'timezone' => 'form.type.timezone', 'url' => 'form.type.url', 'button' => 'form.type.button', 'submit' => 'form.type.submit', 'reset' => 'form.type.reset', 'currency' => 'form.type.currency', 'entity' => 'form.type.entity', 'fos_user_username' => 'fos_user.username_form_type', 'fos_user_profile' => 'fos_user.profile.form.type', 'fos_user_registration' => 'fos_user.registration.form.type', 'fos_user_change_password' => 'fos_user.change_password.form.type', 'fos_user_resetting' => 'fos_user.resetting.form.type', 'recipients_selector' => 'fos_message.recipients_selector'), array('form' => array(0 => 'form.type_extension.form.http_foundation', 1 => 'form.type_extension.form.validator', 2 => 'form.type_extension.csrf', 3 => 'form.type_extension.form.data_collector'), 'repeated' => array(0 => 'form.type_extension.repeated.validator'), 'submit' => array(0 => 'form.type_extension.submit.validator')), array(0 => 'form.type_guesser.validator', 1 => 'form.type_guesser.doctrine'))), $this->get('form.resolved_type_factory'));
     }
 
     /**
@@ -1380,6 +1417,355 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'fos_message.authorizer' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Security\Authorizer A FOS\MessageBundle\Security\Authorizer instance.
+     */
+    protected function getFosMessage_AuthorizerService()
+    {
+        return $this->services['fos_message.authorizer'] = new \FOS\MessageBundle\Security\Authorizer($this->get('fos_message.participant_provider'));
+    }
+
+    /**
+     * Gets the 'fos_message.composer' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Composer\Composer A FOS\MessageBundle\Composer\Composer instance.
+     */
+    protected function getFosMessage_ComposerService()
+    {
+        return $this->services['fos_message.composer'] = new \FOS\MessageBundle\Composer\Composer($this->get('fos_message.message_manager'), $this->get('fos_message.thread_manager'));
+    }
+
+    /**
+     * Gets the 'fos_message.deleter' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Deleter\Deleter A FOS\MessageBundle\Deleter\Deleter instance.
+     */
+    protected function getFosMessage_DeleterService()
+    {
+        return $this->services['fos_message.deleter'] = new \FOS\MessageBundle\Deleter\Deleter($this->get('fos_message.authorizer'), $this->get('fos_message.participant_provider'), $this->get('debug.event_dispatcher'));
+    }
+
+    /**
+     * Gets the 'fos_message.message_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\EntityManager\MessageManager A FOS\MessageBundle\EntityManager\MessageManager instance.
+     */
+    protected function getFosMessage_MessageManagerService()
+    {
+        return $this->services['fos_message.message_manager'] = new \FOS\MessageBundle\EntityManager\MessageManager($this->get('doctrine.orm.default_entity_manager'), 'MessageBundle\\Entity\\Message', 'MessageBundle\\Entity\\MessageMetadata');
+    }
+
+    /**
+     * Gets the 'fos_message.message_reader' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Reader\Reader A FOS\MessageBundle\Reader\Reader instance.
+     */
+    protected function getFosMessage_MessageReaderService()
+    {
+        return $this->services['fos_message.message_reader'] = new \FOS\MessageBundle\Reader\Reader($this->get('fos_message.participant_provider'), $this->get('fos_message.message_manager'), $this->get('debug.event_dispatcher'));
+    }
+
+    /**
+     * Gets the 'fos_message.new_thread_form.factory' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\FormFactory\NewThreadMessageFormFactory A FOS\MessageBundle\FormFactory\NewThreadMessageFormFactory instance.
+     */
+    protected function getFosMessage_NewThreadForm_FactoryService()
+    {
+        return $this->services['fos_message.new_thread_form.factory'] = new \FOS\MessageBundle\FormFactory\NewThreadMessageFormFactory($this->get('form.factory'), $this->get('fos_message.new_thread_form.type'), 'message', 'FOS\\MessageBundle\\FormModel\\NewThreadMessage');
+    }
+
+    /**
+     * Gets the 'fos_message.new_thread_form.handler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\FormHandler\NewThreadMessageFormHandler A FOS\MessageBundle\FormHandler\NewThreadMessageFormHandler instance.
+     * 
+     * @throws InactiveScopeException when the 'fos_message.new_thread_form.handler' service is requested while the 'request' scope is not active
+     */
+    protected function getFosMessage_NewThreadForm_HandlerService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('fos_message.new_thread_form.handler', 'request');
+        }
+
+        return $this->services['fos_message.new_thread_form.handler'] = $this->scopedServices['request']['fos_message.new_thread_form.handler'] = new \FOS\MessageBundle\FormHandler\NewThreadMessageFormHandler($this->get('request'), $this->get('fos_message.composer'), $this->get('fos_message.sender'), $this->get('fos_message.participant_provider'));
+    }
+
+    /**
+     * Gets the 'fos_message.new_thread_form.type' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\FormType\NewThreadMessageFormType A FOS\MessageBundle\FormType\NewThreadMessageFormType instance.
+     */
+    protected function getFosMessage_NewThreadForm_TypeService()
+    {
+        return $this->services['fos_message.new_thread_form.type'] = new \FOS\MessageBundle\FormType\NewThreadMessageFormType();
+    }
+
+    /**
+     * Gets the 'fos_message.participant_provider' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Security\ParticipantProvider A FOS\MessageBundle\Security\ParticipantProvider instance.
+     */
+    protected function getFosMessage_ParticipantProviderService()
+    {
+        return $this->services['fos_message.participant_provider'] = new \FOS\MessageBundle\Security\ParticipantProvider($this->get('security.context'));
+    }
+
+    /**
+     * Gets the 'fos_message.provider' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Provider\Provider A FOS\MessageBundle\Provider\Provider instance.
+     */
+    protected function getFosMessage_ProviderService()
+    {
+        return $this->services['fos_message.provider'] = new \FOS\MessageBundle\Provider\Provider($this->get('fos_message.thread_manager'), $this->get('fos_message.message_manager'), $this->get('fos_message.thread_reader'), $this->get('fos_message.authorizer'), $this->get('fos_message.participant_provider'));
+    }
+
+    /**
+     * Gets the 'fos_message.recipients_selector' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\FormType\RecipientsType A FOS\MessageBundle\FormType\RecipientsType instance.
+     */
+    protected function getFosMessage_RecipientsSelectorService()
+    {
+        return $this->services['fos_message.recipients_selector'] = new \FOS\MessageBundle\FormType\RecipientsType(new \FOS\MessageBundle\DataTransformer\RecipientsDataTransformer($this->get('fos_user.user_to_username_transformer')));
+    }
+
+    /**
+     * Gets the 'fos_message.reply_form.factory' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\FormFactory\ReplyMessageFormFactory A FOS\MessageBundle\FormFactory\ReplyMessageFormFactory instance.
+     */
+    protected function getFosMessage_ReplyForm_FactoryService()
+    {
+        return $this->services['fos_message.reply_form.factory'] = new \FOS\MessageBundle\FormFactory\ReplyMessageFormFactory($this->get('form.factory'), $this->get('fos_message.reply_form.type'), 'message', 'FOS\\MessageBundle\\FormModel\\ReplyMessage');
+    }
+
+    /**
+     * Gets the 'fos_message.reply_form.handler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\FormHandler\ReplyMessageFormHandler A FOS\MessageBundle\FormHandler\ReplyMessageFormHandler instance.
+     * 
+     * @throws InactiveScopeException when the 'fos_message.reply_form.handler' service is requested while the 'request' scope is not active
+     */
+    protected function getFosMessage_ReplyForm_HandlerService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('fos_message.reply_form.handler', 'request');
+        }
+
+        return $this->services['fos_message.reply_form.handler'] = $this->scopedServices['request']['fos_message.reply_form.handler'] = new \FOS\MessageBundle\FormHandler\ReplyMessageFormHandler($this->get('request'), $this->get('fos_message.composer'), $this->get('fos_message.sender'), $this->get('fos_message.participant_provider'));
+    }
+
+    /**
+     * Gets the 'fos_message.reply_form.type' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\FormType\ReplyMessageFormType A FOS\MessageBundle\FormType\ReplyMessageFormType instance.
+     */
+    protected function getFosMessage_ReplyForm_TypeService()
+    {
+        return $this->services['fos_message.reply_form.type'] = new \FOS\MessageBundle\FormType\ReplyMessageFormType();
+    }
+
+    /**
+     * Gets the 'fos_message.search_finder.default' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Search\Finder A FOS\MessageBundle\Search\Finder instance.
+     */
+    protected function getFosMessage_SearchFinder_DefaultService()
+    {
+        return $this->services['fos_message.search_finder.default'] = new \FOS\MessageBundle\Search\Finder($this->get('fos_message.participant_provider'), $this->get('fos_message.thread_manager'));
+    }
+
+    /**
+     * Gets the 'fos_message.search_query_factory.default' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Search\QueryFactory A FOS\MessageBundle\Search\QueryFactory instance.
+     * 
+     * @throws InactiveScopeException when the 'fos_message.search_query_factory.default' service is requested while the 'request' scope is not active
+     */
+    protected function getFosMessage_SearchQueryFactory_DefaultService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('fos_message.search_query_factory.default', 'request');
+        }
+
+        return $this->services['fos_message.search_query_factory.default'] = $this->scopedServices['request']['fos_message.search_query_factory.default'] = new \FOS\MessageBundle\Search\QueryFactory($this->get('request'), 'q');
+    }
+
+    /**
+     * Gets the 'fos_message.sender' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Sender\Sender A FOS\MessageBundle\Sender\Sender instance.
+     */
+    protected function getFosMessage_SenderService()
+    {
+        return $this->services['fos_message.sender'] = new \FOS\MessageBundle\Sender\Sender($this->get('fos_message.message_manager'), $this->get('fos_message.thread_manager'), $this->get('debug.event_dispatcher'));
+    }
+
+    /**
+     * Gets the 'fos_message.spam_detector' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\SpamDetection\NoopSpamDetector A FOS\MessageBundle\SpamDetection\NoopSpamDetector instance.
+     */
+    protected function getFosMessage_SpamDetectorService()
+    {
+        return $this->services['fos_message.spam_detector'] = new \FOS\MessageBundle\SpamDetection\NoopSpamDetector();
+    }
+
+    /**
+     * Gets the 'fos_message.thread_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\EntityManager\ThreadManager A FOS\MessageBundle\EntityManager\ThreadManager instance.
+     */
+    protected function getFosMessage_ThreadManagerService()
+    {
+        return $this->services['fos_message.thread_manager'] = new \FOS\MessageBundle\EntityManager\ThreadManager($this->get('doctrine.orm.default_entity_manager'), 'MessageBundle\\Entity\\Thread', 'MessageBundle\\Entity\\ThreadMetadata', $this->get('fos_message.message_manager'));
+    }
+
+    /**
+     * Gets the 'fos_message.thread_reader' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Reader\Reader A FOS\MessageBundle\Reader\Reader instance.
+     */
+    protected function getFosMessage_ThreadReaderService()
+    {
+        return $this->services['fos_message.thread_reader'] = new \FOS\MessageBundle\Reader\Reader($this->get('fos_message.participant_provider'), $this->get('fos_message.thread_manager'), $this->get('debug.event_dispatcher'));
+    }
+
+    /**
+     * Gets the 'fos_message.twig_extension' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Twig\Extension\MessageExtension A FOS\MessageBundle\Twig\Extension\MessageExtension instance.
+     */
+    protected function getFosMessage_TwigExtensionService()
+    {
+        return $this->services['fos_message.twig_extension'] = new \FOS\MessageBundle\Twig\Extension\MessageExtension($this->get('fos_message.participant_provider'), $this->get('fos_message.provider'), $this->get('fos_message.authorizer'));
+    }
+
+    /**
+     * Gets the 'fos_message.validator.authorization' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Validator\AuthorizationValidator A FOS\MessageBundle\Validator\AuthorizationValidator instance.
+     */
+    protected function getFosMessage_Validator_AuthorizationService()
+    {
+        return $this->services['fos_message.validator.authorization'] = new \FOS\MessageBundle\Validator\AuthorizationValidator($this->get('fos_message.authorizer'));
+    }
+
+    /**
+     * Gets the 'fos_message.validator.reply_authorization' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Validator\ReplyAuthorizationValidator A FOS\MessageBundle\Validator\ReplyAuthorizationValidator instance.
+     */
+    protected function getFosMessage_Validator_ReplyAuthorizationService()
+    {
+        return $this->services['fos_message.validator.reply_authorization'] = new \FOS\MessageBundle\Validator\ReplyAuthorizationValidator($this->get('fos_message.authorizer'), $this->get('fos_message.participant_provider'));
+    }
+
+    /**
+     * Gets the 'fos_message.validator.self_recipient' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Validator\SelfRecipientValidator A FOS\MessageBundle\Validator\SelfRecipientValidator instance.
+     */
+    protected function getFosMessage_Validator_SelfRecipientService()
+    {
+        return $this->services['fos_message.validator.self_recipient'] = new \FOS\MessageBundle\Validator\SelfRecipientValidator($this->get('fos_message.participant_provider'));
+    }
+
+    /**
+     * Gets the 'fos_message.validator.spam' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \FOS\MessageBundle\Validator\SpamValidator A FOS\MessageBundle\Validator\SpamValidator instance.
+     * 
+     * @throws InactiveScopeException when the 'fos_message.validator.spam' service is requested while the 'request' scope is not active
+     */
+    protected function getFosMessage_Validator_SpamService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('fos_message.validator.spam', 'request');
+        }
+
+        return $this->services['fos_message.validator.spam'] = $this->scopedServices['request']['fos_message.validator.spam'] = new \FOS\MessageBundle\Validator\SpamValidator($this->get('fos_message.spam_detector'));
+    }
+
+    /**
      * Gets the 'fos_user.change_password.form.factory' service.
      *
      * This service is shared.
@@ -1586,7 +1972,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getFosUser_UsernameFormTypeService()
     {
-        return $this->services['fos_user.username_form_type'] = new \FOS\UserBundle\Form\Type\UsernameFormType(new \FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer($this->get('fos_user.user_manager')));
+        return $this->services['fos_user.username_form_type'] = new \FOS\UserBundle\Form\Type\UsernameFormType($this->get('fos_user.user_to_username_transformer'));
     }
 
     /**
@@ -2327,7 +2713,7 @@ class appDevDebugProjectContainer extends Container
         $o = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $l, array(), $a);
         $o->setOptions(array('login_path' => '/login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'));
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($k, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('fos_user.user_provider.username')), 'main', $a, $c), 2 => $m, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, $this->get('security.authentication.session_strategy'), $l, 'main', $n, $o, array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c, $this->get('form.csrf_provider')), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '550c5b05261d8', $a, $f), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $k, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $l, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $l, '/login', false), NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($k, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $this->get('fos_user.user_provider.username')), 'main', $a, $c), 2 => $m, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $f, $this->get('security.authentication.session_strategy'), $l, 'main', $n, $o, array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $a, $c, $this->get('form.csrf_provider')), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '551bf861d890c', $a, $f), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $k, $f)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $l, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $l, '/login', false), NULL, NULL, $a));
     }
 
     /**
@@ -3587,6 +3973,15 @@ class appDevDebugProjectContainer extends Container
         $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/translations/validators.uk.yml'), 'uk', 'validators');
         $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/translations/validators.vi.yml'), 'vi', 'validators');
         $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/translations/validators.zh_CN.yml'), 'zh_CN', 'validators');
+        $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.de.yml'), 'de', 'FOSMessageBundle');
+        $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.en.yml'), 'en', 'FOSMessageBundle');
+        $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.es.yml'), 'es', 'FOSMessageBundle');
+        $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.fr.yml'), 'fr', 'FOSMessageBundle');
+        $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.nl.yml'), 'nl', 'FOSMessageBundle');
+        $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.pl.yml'), 'pl', 'FOSMessageBundle');
+        $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.ru.yml'), 'ru', 'FOSMessageBundle');
+        $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.sl.yml'), 'sl', 'FOSMessageBundle');
+        $instance->addResource('yml', ($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/translations/FOSMessageBundle.sv.yml'), 'sv', 'FOSMessageBundle');
 
         return $instance;
     }
@@ -3631,6 +4026,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension(new \Twig_Extension_Debug());
         $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), true, array(), array(), new \Symfony\Bundle\AsseticBundle\DefaultValueSupplier($this)));
         $instance->addExtension(new \Doctrine\Bundle\DoctrineBundle\Twig\DoctrineExtension());
+        $instance->addExtension($this->get('fos_message.twig_extension'));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\DumpExtension($this->get('var_dumper.cloner')));
         $instance->addExtension(new \Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension());
         $instance->addGlobal('app', $this->get('templating.globals'));
@@ -3698,6 +4094,8 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/src/BaseBundle/Resources/views'), 'Base');
         $instance->addPath(($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/views'), 'FOSUser');
         $instance->addPath(($this->targetDirs[3].'/src/UserBundle/Resources/views'), 'User');
+        $instance->addPath(($this->targetDirs[3].'/src/MessageBundle/Resources/views'), 'Message');
+        $instance->addPath(($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/views'), 'FOSMessage');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views'), 'Debug');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views'), 'WebProfiler');
         $instance->addPath(($this->targetDirs[3].'/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views'), 'SensioDistribution');
@@ -3758,10 +4156,10 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['validator.builder'] = $instance = \Symfony\Component\Validator\Validation::createValidatorBuilder();
 
-        $instance->setConstraintValidatorFactory(new \Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory($this, array('validator.expression' => 'validator.expression', 'Symfony\\Component\\Validator\\Constraints\\EmailValidator' => 'validator.email', 'security.validator.user_password' => 'security.validator.user_password', 'doctrine.orm.validator.unique' => 'doctrine.orm.validator.unique')));
+        $instance->setConstraintValidatorFactory(new \Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory($this, array('validator.expression' => 'validator.expression', 'Symfony\\Component\\Validator\\Constraints\\EmailValidator' => 'validator.email', 'security.validator.user_password' => 'security.validator.user_password', 'doctrine.orm.validator.unique' => 'doctrine.orm.validator.unique', 'fos_message.validator.authorization' => 'fos_message.validator.authorization', 'fos_message.validator.reply_authorization' => 'fos_message.validator.reply_authorization', 'fos_message.validator.spam' => 'fos_message.validator.spam', 'fos_message.validator.self_recipient' => 'fos_message.validator.self_recipient')));
         $instance->setTranslator($this->get('translator'));
         $instance->setTranslationDomain('validators');
-        $instance->addXmlMappings(array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/config/validation.xml'), 1 => ($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/config/validation.xml')));
+        $instance->addXmlMappings(array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/config/validation.xml'), 1 => ($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/config/validation.xml'), 2 => ($this->targetDirs[3].'/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/config/validation.xml')));
         $instance->enableAnnotationMapping($this->get('annotation_reader'));
         $instance->addMethodMapping('loadValidatorMetadata');
         $instance->setApiVersion(3);
@@ -3957,6 +4355,23 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'fos_user.user_to_username_transformer' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return \FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer A FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer instance.
+     */
+    protected function getFosUser_UserToUsernameTransformerService()
+    {
+        return $this->services['fos_user.user_to_username_transformer'] = new \FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer($this->get('fos_user.user_manager'));
+    }
+
+    /**
      * Gets the 'router.request_context' service.
      *
      * This service is shared.
@@ -4007,7 +4422,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('fos_user.user_provider.username'), $this->get('security.user_checker'), 'main', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('550c5b05261d8')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('fos_user.user_provider.username'), $this->get('security.user_checker'), 'main', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('551bf861d890c')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -4204,6 +4619,8 @@ class appDevDebugProjectContainer extends Container
                 'BaseBundle' => 'BaseBundle\\BaseBundle',
                 'FOSUserBundle' => 'FOS\\UserBundle\\FOSUserBundle',
                 'UserBundle' => 'UserBundle\\UserBundle',
+                'MessageBundle' => 'MessageBundle\\MessageBundle',
+                'FOSMessageBundle' => 'FOS\\MessageBundle\\FOSMessageBundle',
                 'DebugBundle' => 'Symfony\\Bundle\\DebugBundle\\DebugBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
@@ -4823,6 +5240,14 @@ class appDevDebugProjectContainer extends Container
                 0 => 'ResetPassword',
                 1 => 'Default',
             ),
+            'fos_message.message_meta_class' => 'MessageBundle\\Entity\\MessageMetadata',
+            'fos_message.thread_meta_class' => 'MessageBundle\\Entity\\ThreadMetadata',
+            'fos_message.message_class' => 'MessageBundle\\Entity\\Message',
+            'fos_message.thread_class' => 'MessageBundle\\Entity\\Thread',
+            'fos_message.new_thread_form.model' => 'FOS\\MessageBundle\\FormModel\\NewThreadMessage',
+            'fos_message.new_thread_form.name' => 'message',
+            'fos_message.reply_form.model' => 'FOS\\MessageBundle\\FormModel\\ReplyMessage',
+            'fos_message.reply_form.name' => 'message',
             'web_profiler.controller.profiler.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ProfilerController',
             'web_profiler.controller.router.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\RouterController',
             'web_profiler.controller.exception.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ExceptionController',

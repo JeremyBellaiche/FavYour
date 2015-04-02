@@ -11,5 +11,23 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class ProjectRepository extends EntityRepository
-{
+{	
+	public function index4projets() {
+		
+		
+		$qb = $this->createQueryBuilder('p')
+
+				  ->orderBy('p.beginDate', 'DESC')
+
+				  ->setMaxResults(3)
+				  
+				  ->getQuery()
+				  
+				  ->getResult();
+				  
+	
+		
+		return $qb;
+		
+	}
 }

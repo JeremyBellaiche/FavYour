@@ -1,0 +1,12 @@
+{# src/ProjectBundle/Resources/views/Project/favproject.html.twig #}
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+	
+	<form action="{{path("edit",{ id : id })}}" method="post">
+	{{form_widget(form)}}
+	<input type="submit">
+	</form>
+
+{% endblock %}

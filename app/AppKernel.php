@@ -21,6 +21,8 @@ class AppKernel extends Kernel
 
             new FOS\UserBundle\FOSUserBundle(),
             new UserBundle\UserBundle(),
+            new MessageBundle\MessageBundle(),
+            new FOS\MessageBundle\FOSMessageBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

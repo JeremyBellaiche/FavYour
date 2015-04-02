@@ -14,15 +14,27 @@ class HomeController extends Controller
     /**
     * @Route("/", name="homepage")
     */
+
     public function indexAction()
     {
         $projects = $this->getDoctrine()->getManager()
                     ->getRepository('ProjectBundle:Project')
                     ->findByHomepage('1', array('id'=>'desc'), 4);
 
-        return $this->render('BaseBundle:Home:index.html.twig',[
+
+                        
+
+        $lastProjects = $this->getDoctrine()->getManager()
+                    ->getRepository('ProjectBundle:Project')
+                    ->findBy(array(), array('id'=>'desc'), 3)
+                    ;          
+
+
+        return $this->render('BaseBundle:Home:index.html.twig', array(
             'projects' => $projects,
-        ]);
+            'lastProjects' => $lastProjects
+            )
+             );
     }
 
     /*
@@ -57,4 +69,10 @@ class HomeController extends Controller
         return $this->render('ProjectBundle:Push:newproject.html.twig');
     }
 
+
+
+   
 }
+
+
+

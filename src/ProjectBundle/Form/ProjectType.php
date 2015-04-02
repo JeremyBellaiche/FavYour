@@ -36,7 +36,19 @@ class ProjectType extends AbstractType
 			->add('location', 'text')
 			->add('duree', 'integer')
 			->add('amountRequested', 'integer')
-			->add('description', 'textarea');
+			->add('description', 'textarea')
+			->add('titreRecompense1', 'text')
+			->add('descriptionRecompense1','textarea')
+			->add('titreRecompense2', 'text')
+			->add('descriptionRecompense2','textarea')
+			->add('titreRecompense3', 'text')
+			->add('descriptionRecompense3','textarea')
+			->add('titreRecompense4', 'text')
+			->add('descriptionRecompense4','textarea')
+			->add('titreRecompense5', 'text')
+			->add('descriptionRecompense5','textarea')
+			->add('file');
+
 
 	}
 
