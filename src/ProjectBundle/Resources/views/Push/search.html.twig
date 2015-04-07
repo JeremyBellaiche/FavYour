@@ -1,0 +1,51 @@
+{# src/ProjectBundle/Resources/views/Project/show.html.twig #}
+{% extends "::base.html.twig" %}
+{% block body %}
+	<div class="container">
+		<h1>Résultats de la recherche</h1>
+
+		
+			
+
+
+		<section class="margin-section-push">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				{% for key, project in projects %}
+						{% set pair = key % 2 %}
+
+		              <div class="col-md-6">
+		                <div class="col-lg-12 text-center">
+		                    <img class="img-circle" src="{{ asset('uploads/documents/' ~ project.path) }}" alt="" width="140" height="140">
+		                    <h2> 
+		                    	<a href="{{ path('project_show', {'id': project.id}) }}">
+								{{ project.title|length > 20 ? project.title|slice(0,20) ~ '...' |raw : project.title|raw }}
+
+		                    	</a>
+		                    </h2>
+		                    <p class="text-justify">{{ project.description | slice(0,230) ~ '...' }}</p>
+
+		                    <div class="progress bar-prog-index">
+						          	  {% set integer = project.amountWon / project.amountRequested * 100 %}
+							          <div class="progress-bar" role="progressbar" aria-valuenow="{{integer}}" aria-valuemin="0" aria-valuemax="100" style="width:{{integer}}%;">
+							            {{ integer | number_format(0) }}%
+							          </div>
+							 </div>
+
+		                    <p><a class="btn btn-default" href="{{ path('project_show', {'id': project.id}) }}" role="button">En savoir plus »</a></p>
+		                </div><!-- /.col-lg-4 -->
+		              </div>
+	             	{% if pair != 0 %}
+							<div class="clearfix"></div>
+					{% endif %}
+
+				{% endfor %}
+			</div>
+	        <div class="col-md-1"></div>
+
+          </section>
+    </div>
+
+
+	</div>
+{% endblock %}

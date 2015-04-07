@@ -73,34 +73,42 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
             // line 26
             echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl(("uploads/documents/" . $this->getAttribute($context["project"], "path", array()))), "html", null, true);
             echo "\" alt=\"\" width=\"140\" height=\"140\">
-\t          <h3>";
-            // line 27
-            echo twig_escape_filter($this->env, $this->getAttribute($context["project"], "title", array()), "html", null, true);
-            echo "</h3>
-\t          <p>";
+\t          <h3>
+\t          \t<a href=\"";
             // line 28
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_show", array("id" => $this->getAttribute($context["project"], "id", array()))), "html", null, true);
+            echo "\">
+\t\t\t\t\t\t\t\t";
+            // line 29
+            echo twig_escape_filter($this->env, (((twig_length_filter($this->env, $this->getAttribute($context["project"], "title", array())) > 20)) ? ((twig_slice($this->env, $this->getAttribute($context["project"], "title", array()), 0, 20) . "...")) : ($this->getAttribute($context["project"], "title", array()))), "html", null, true);
+            echo "
+
+\t\t                    \t</a>
+\t\t      </h3>
+\t          <p>";
+            // line 33
             echo twig_escape_filter($this->env, (twig_slice($this->env, $this->getAttribute($context["project"], "description", array()), 0, 230) . "..."), "html", null, true);
             echo "</p>
 \t\t\t\t
 \t\t\t  <div class=\"progress bar-prog-index\">
 \t\t\t\t\t\t          \t  ";
-            // line 31
+            // line 36
             $context["integer"] = (($this->getAttribute($context["project"], "amountWon", array()) / $this->getAttribute($context["project"], "amountRequested", array())) * 100);
-            // line 32
+            // line 37
             echo "\t\t\t\t\t\t\t          <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"";
             echo twig_escape_filter($this->env, (isset($context["integer"]) ? $context["integer"] : $this->getContext($context, "integer")), "html", null, true);
             echo "\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:";
             echo twig_escape_filter($this->env, (isset($context["integer"]) ? $context["integer"] : $this->getContext($context, "integer")), "html", null, true);
             echo "%;\">
 \t\t\t\t\t\t\t            ";
-            // line 33
+            // line 38
             echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (isset($context["integer"]) ? $context["integer"] : $this->getContext($context, "integer")), 0), "html", null, true);
             echo "%
 \t\t\t\t\t\t\t          </div>
 \t\t\t </div>
 
 \t          <p><a class=\"btn btn-default\" href=\"";
-            // line 37
+            // line 42
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_show", array("id" => $this->getAttribute($context["project"], "id", array()))), "html", null, true);
             echo "\" role=\"button\">En savoir plus »</a></p>
 \t          </div><!-- /.col-lg-4 -->
@@ -110,51 +118,58 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['project'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 41
+        // line 46
         echo "\t      </div>
 
 \t      <h1 class=\"titre-projetsemaine\">Derniers projets</h1>
 \t\t\t<div class=\"row\">
 
 \t\t\t";
-        // line 46
+        // line 51
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["lastProjects"]) ? $context["lastProjects"] : $this->getContext($context, "lastProjects")));
         foreach ($context['_seq'] as $context["_key"] => $context["lastProject"]) {
             echo "\t
 \t        <div class=\"col-lg-4 text-center\">
 \t          <img class=\"img-circle\" src=\"";
-            // line 48
+            // line 53
             echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl(("uploads/documents/" . $this->getAttribute($context["lastProject"], "path", array()))), "html", null, true);
             echo "\" alt=\"\" width=\"140\" height=\"140\">
-\t          <h3>";
-            // line 49
-            echo twig_escape_filter($this->env, $this->getAttribute($context["lastProject"], "title", array()), "html", null, true);
-            echo "</h3>
+\t          <h3><a href=\"";
+            // line 54
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_show", array("id" => $this->getAttribute($context["lastProject"], "id", array()))), "html", null, true);
+            echo "\">
+\t\t\t\t\t\t\t\t";
+            // line 55
+            echo twig_escape_filter($this->env, (((twig_length_filter($this->env, $this->getAttribute($context["lastProject"], "title", array())) > 20)) ? ((twig_slice($this->env, $this->getAttribute($context["lastProject"], "title", array()), 0, 20) . "...")) : ($this->getAttribute($context["lastProject"], "title", array()))), "html", null, true);
+            echo "
+
+\t\t                    \t</a>
+\t\t      </h3>
 \t          <p>";
-            // line 50
+            // line 59
             echo twig_escape_filter($this->env, (twig_slice($this->env, $this->getAttribute($context["lastProject"], "description", array()), 0, 230) . "..."), "html", null, true);
             echo "</p>
 
 \t          <div class=\"progress bar-prog-index\">
 \t\t\t\t\t\t          \t  ";
-            // line 53
+            // line 62
             $context["integer"] = (($this->getAttribute($context["lastProject"], "amountWon", array()) / $this->getAttribute($context["lastProject"], "amountRequested", array())) * 100);
-            // line 54
+            // line 63
             echo "\t\t\t\t\t\t\t          <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"";
             echo twig_escape_filter($this->env, (isset($context["integer"]) ? $context["integer"] : $this->getContext($context, "integer")), "html", null, true);
             echo "\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:";
             echo twig_escape_filter($this->env, (isset($context["integer"]) ? $context["integer"] : $this->getContext($context, "integer")), "html", null, true);
             echo "%;\">
 \t\t\t\t\t\t\t            ";
-            // line 55
+            // line 64
             echo twig_escape_filter($this->env, twig_number_format_filter($this->env, (isset($context["integer"]) ? $context["integer"] : $this->getContext($context, "integer")), 0), "html", null, true);
             echo "%
 \t\t\t\t\t\t\t          </div>
 \t\t\t </div>
 
 \t          <p><a class=\"btn btn-default\" href=\"";
-            // line 59
+            // line 68
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_show", array("id" => $this->getAttribute($context["lastProject"], "id", array()))), "html", null, true);
             echo "\" role=\"button\">En savoir plus »</a></p>
 \t          </div><!-- /.col-lg-4 -->
@@ -164,7 +179,7 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['lastProject'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 63
+        // line 72
         echo "\t      </div>
 \t    </div>
 \t</section>
@@ -184,6 +199,6 @@ class __TwigTemplate_89b9908929e5cdcaa383644cb3ecebb5d4e1f2e45ded9270c8c8d2871cb
 
     public function getDebugInfo()
     {
-        return array (  168 => 63,  158 => 59,  151 => 55,  144 => 54,  142 => 53,  136 => 50,  132 => 49,  128 => 48,  121 => 46,  114 => 41,  104 => 37,  97 => 33,  90 => 32,  88 => 31,  82 => 28,  78 => 27,  74 => 26,  67 => 24,  59 => 18,  56 => 17,  48 => 11,  40 => 5,  37 => 4,  11 => 2,);
+        return array (  183 => 72,  173 => 68,  166 => 64,  159 => 63,  157 => 62,  151 => 59,  144 => 55,  140 => 54,  136 => 53,  129 => 51,  122 => 46,  112 => 42,  105 => 38,  98 => 37,  96 => 36,  90 => 33,  83 => 29,  79 => 28,  74 => 26,  67 => 24,  59 => 18,  56 => 17,  48 => 11,  40 => 5,  37 => 4,  11 => 2,);
     }
 }

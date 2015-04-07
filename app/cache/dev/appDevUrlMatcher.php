@@ -146,11 +146,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'BaseBundle\\Controller\\HomeController::indexAction',  '_route' => 'homepage',);
         }
 
-        // push
-        if ($pathinfo === '/push') {
-            return array (  '_controller' => 'BaseBundle\\Controller\\HomeController::pushAction',  '_route' => 'push',);
-        }
-
         // bepushed
         if ($pathinfo === '/be-pushed') {
             return array (  '_controller' => 'BaseBundle\\Controller\\HomeController::bepushedAction',  '_route' => 'bepushed',);
@@ -194,6 +189,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // remove-favoris
         if (0 === strpos($pathinfo, '/remove-favoris') && preg_match('#^/remove\\-favoris/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'remove-favoris')), array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::removeFavorisAction',));
+        }
+
+        // push
+        if ($pathinfo === '/push') {
+            return array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::pushAction',  '_route' => 'push',);
+        }
+
+        // search
+        if ($pathinfo === '/search') {
+            return array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::postSearch',  '_route' => 'search',);
         }
 
         if (0 === strpos($pathinfo, '/log')) {

@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectBundle\Entity\Project;
 use ProjectBundle\Entity\FavoritedProject;
 use ProjectBundle\Form\ProjectType;
+use ProjectBundle\Form\SearchType;
 
 
 class ProjectController extends Controller
@@ -224,6 +225,83 @@ class ProjectController extends Controller
     }
 
 
+    /**
+    * @Route("/push", name ="push")
+    */
+    public function pushAction(Request $request)
+    {
+        return $this->render("ProjectBundle:Push:push.html.twig");
+    }
 
+    /**
+    * @Route("/search", name ="search")
+    */
+    public function postSearch(Request $request)
+    {
+        $array = [];
+        $search = $this->getRequest()->request;
+        // On a initialisé notre PUTAIN de tableau (ET oui c'est un putain de trafic)
+        if($search->get('Art')){
+            array_push($array, 'Art');
+        }
+        if($search->get('Littérature')){
+            array_push($array, 'Littérature');
+        }
+        if($search->get('Spectacle')){
+            array_push($array, 'Spectacle');
+        }
+        if($search->get('Photographie')){
+            array_push($array, 'Photographie');
+        }
+        if($search->get('Mode')){
+            array_push($array, 'Mode');
+        }
+        if($search->get('Journalisme')){
+            array_push($array, 'Journalisme');
+        }
+        if($search->get('Education')){
+            array_push($array, 'Education');
+        }
+        if($search->get('Ecologie')){
+            array_push($array, 'Ecologie');
+        }
+        if($search->get('Solidarité')){
+            array_push($array, 'Solidarité');
+        }
+        if($search->get('Design')){
+            array_push($array, 'Design');
+        }
+        if($search->get('Invention')){
+            array_push($array, 'Invention');
+        }
+        if($search->get('Film')){
+            array_push($array, 'Film');
+        }
+        if($search->get('Cuisine')){
+            array_push($array, 'Cuisine');
+        }
+        if($search->get('Jeux')){
+            array_push($array, 'Jeux');
+        }
+        if($search->get('Application')){
+            array_push($array, 'Application');
+        }
+        if($search->get('Gadgets')){
+            array_push($array, 'Gadgets');
+        }
+
+
+        $projects = $this->getDoctrine()->getManager()
+                    ->getRepository('ProjectBundle:Project')
+                    ->findBy(
+                       array('categorie' => $array )        // $where 
+                     );
+
+
+
+        return $this->render('ProjectBundle:Push:search.html.twig', array(
+            'projects' => $projects
+        ));
+    }
 
 }  

@@ -36,7 +36,15 @@ class DefaultController extends Controller
      */
     public function showAction(User $user)
     {
-        return ['user' => $user];
+
+        $em = $this -> getDoctrine() -> getEntityManager();
+
+            $Projects = $this->getDoctrine()->getManager()
+                    ->getRepository('ProjectBundle:Project')
+                    ->findByAuthor($user->getId());
+
+    
+        return ['user' => $user,'Projects' => $Projects];
     }
 
 }
