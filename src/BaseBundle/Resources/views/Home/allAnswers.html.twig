@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+	
+	
+	{% block header %}
+			
+	{% endblock %}
+	
+	
+	{% block body %}
+		
+		{% for contact in listeContacts %}	
+			
+			<div class="well"> <!-- Pour Yannis, design à modifier -->
+		
+				<a href="{{ path('answer', {'id' : contact.id}) }}"><h5>Contact : {{ contact.mail }}</h5></a>
+				
+				<a href="{{ path('answer', {'id' : contact.id}) }}"><p>{{ contact.content }}</p></a>
+			
+			</div>
+			
+		{% endfor %}
+	
+	{% endblock %}

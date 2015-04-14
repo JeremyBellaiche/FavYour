@@ -1,0 +1,12 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<div style="padding-top:5%;padding-bottom:5%;margin-top:5%;margin-bottom:5%;">
+<h2 style="text-align: center;">Checkez votre boîte mail</h2></br>
+<p style="text-align: center;">
+{{ 'resetting.check_email'|trans({'%email%': email}) }}
+</p>
+</br></div>
+{% endblock %}
