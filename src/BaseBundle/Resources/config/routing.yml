@@ -1,15 +1,3 @@
 base_homepage:
     path:     /hello/{name}
     defaults: { _controller: BaseBundle:Default:index }
-
-contact:
-    path:     /contact
-    defaults: { _controller: BaseBundle:Home:contact }
-
-answer:
-    path: /answer/{id}
-    defaults: { _controller: BaseBundle:Home:answer }
-
-all_answers:
-    path: /answer
-    defaults: { _controller: BaseBundle:Home:allAnswers }

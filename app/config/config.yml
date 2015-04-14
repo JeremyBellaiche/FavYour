@@ -79,12 +79,6 @@ fos_user:
     firewall_name: main
     user_class: UserBundle\Entity\User
 
-    from_email:
-        address: noreplyfavyour@gmail.com
-        sender_name: FavYour
-
-
-
 fos_message:
     db_driver: orm
     thread_class: MessageBundle\Entity\Thread
