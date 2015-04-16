@@ -87,25 +87,7 @@
           
           <section class="marge-btn-projet">
             <div class="col-md-3">
-              <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-                <label> Entrez le montant
-                  <input type="text" name="amount" placeholder="montant"/>
-                </label>
-                <input name="currency_code" type="hidden" value="EUR" />
-                <input name="shipping" type="hidden" value="0.00" />
-                <input name="tax" type="hidden" value="0.00" />
-                <input name="return" type="hidden" value="http://www.ens.math-info.univ-paris5.fr/~ig09199/success.html" />
-                <input name="cancel_return" type="hidden" value="http://www.ens.math-info.univ-paris5.fr/~ig09199/cancel.html" />
-                <input name="notify_url" type="hidden" value="http://www.ens.math-info.univ-paris5.fr/~ig09199/ipn.php" />
-                <input name="cmd" type="hidden" value="_xclick" />
-                <input name="business" type="hidden" value="aroulpsg-facilitator@hotmail.fr" />
-                <input name="item_name" type="hidden" value="Don" />
-                <!--input name="no_note" type="hidden" value="1" />
-                <input name="lc" type="hidden" value="FR" />
-                <input name="bn" type="hidden" value="PP-BuyNowBF" /-->
-                <input name="custom" type="hidden" value="var1=1&var2=lol" />
-                <input type="submit" value="Faire un don">
-              </form>
+              <a href="{{ path('form_don_route') }}"><img src="{{asset('img/don.png')}}"></a>
             </div>
             <div class="col-md-3"> 
               <a href="{{ path("ajouter-favoris", { id: project.id} ) }}" type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> Ajouter aux favoris</a>
@@ -124,8 +106,12 @@
               <table>
                 <tbody>
                   <tr>
-                    <th width="100px">Fondateurs : </th>
-                    <td>Aroul Retina, Yannis Gil, Samuel Benichou, Salah Saiad</td>
+					<th>Catégorie :</th>
+					<td>{{project.categorie}}</td>
+				  </tr>
+				  <tr>
+                    <th width="100px">Fondateur : </th>
+                    <td><a href="{{path('profil_show', {'id': authorId})}}">{{project.author}}</a></td>
                   </tr>
                   <tr>
                     <th>Localisation :</th>

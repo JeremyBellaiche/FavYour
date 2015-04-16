@@ -1,0 +1,32 @@
+{% extends 'FOSMessageBundle::layout.html.twig' %}
+
+{% block fos_message_content %}
+
+<div class="text-center">
+	<h3>{{ thread.subject }}</h3>
+</div>
+
+{% for message in thread.messages %}
+    <div class="message">
+        <blockquote>
+            <p class="msg-text">{{ message.body }}</p>
+			<footer>
+				<cite title="{{ message.sender|e }}">{{ message.sender|e }}</cite>, le {{ message.createdAt|date }}
+			</footer>
+        </blockquote>
+    </div>
+{% endfor %}
+
+	<div class="col-md-3 reply">
+		{{ form_start(form, { 'attr': {'class': ''} })  }}
+			<div class="form-group">
+				{{ form_label(form.body, "Votre réponse") }}
+				{{ form_widget(form.body,{'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(form.body) }}
+			</div>
+			
+			<button type="submit" class="btn btn-success col-md-offset-5">Envoyer</button>
+		{{ form_end(form) }}
+	</div>
+
+{% endblock %}

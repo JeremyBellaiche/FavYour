@@ -5,6 +5,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Util\StringUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -26,7 +28,11 @@ class ProjectController extends Controller
      */
     public function showAction(Project $project)
     {
-        return ['project' => $project];
+        $author = $project->getAuthor();
+		$userManager = $this->get('fos_user.user_manager');
+		$user = $userManager->findUserByUsername($author);
+		
+		return $this->render('ProjectBundle:Project:show.html.twig', array('project' => $project, 'authorId' => $user->getId()));
     }
 
     /**
@@ -36,6 +42,11 @@ class ProjectController extends Controller
      */
     public function editAction(Project $project)
     {
+		if(!StringUtils::equals($this->getUser()->getUsername(), $project->getAuthor()))
+		{
+			throw new AccessDeniedException('Vous n\'avez pas la permission d\'éditer ce projet.');
+		}
+		
         $em = $this -> getDoctrine() -> getEntityManager();
 
         $form = $this -> createForm(new ProjectType(), $project);
@@ -77,6 +88,11 @@ class ProjectController extends Controller
             
             if($form -> handleRequest($request)->isValid()){
                 $em = $this -> getDoctrine() -> getManager(); 
+				$project->setAuthor($this->getUser()->getUsername());
+				$duree = new \DateInterval('P'.$project->getDuree().'D');
+				$newDate = new \DateTime();
+				$endDate = $newDate->add($duree);
+				$project->setEndDate($endDate);
                 $project->upload();
 
 
@@ -151,12 +167,9 @@ class ProjectController extends Controller
     */
     public function myprojectsAction (){
 
-
-            $currentId = $this->get('security.token_storage')->getToken()->getUser();
-
             $Projects = $this->getDoctrine()->getManager()
                     ->getRepository('ProjectBundle:Project')
-                    ->findByAuthor($currentId);
+                    ->findByAuthor($this->getUser()->getUsername());
 
         return $this -> render('ProjectBundle:Back:myprojects.html.twig', array(
             'Projects' => $Projects,
@@ -303,5 +316,9 @@ class ProjectController extends Controller
             'projects' => $projects
         ));
     }
-
+	
+	public function donateAction()
+	{
+		return $this->render('ProjectBundle:Payment:form_don.html.twig');
+	}
 }  

@@ -1,0 +1,31 @@
+{% extends 'FOSMessageBundle::layout.html.twig' %}
+
+{% block fos_message_content %}
+
+<div class="container">
+	<div class="col-md-offset-2 col-md-8 log-theme">
+		{{ form_start(form, { 'attr': {'class': ''} })  }}
+			<div class="form-group">
+				{{ form_label(form.recipient, "Nom d'utilisateur") }}
+				{{ form_widget(form.recipient,{'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(form.recipient) }}
+			</div>
+			
+			<div class="form-group">
+				{{ form_label(form.subject, "Sujet") }}
+				{{ form_widget(form.subject,{'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(form.subject) }}
+			</div>
+
+			<div class="form-group">
+				{{ form_label(form.body, "Votre message") }}
+				{{ form_widget(form.body,{'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(form.body) }}
+			</div>
+			
+			<button type="submit" class="btn btn-success col-md-offset-5">Envoyer</button>
+		{{ form_end(form) }}
+	</div>
+</div>
+
+{% endblock %}

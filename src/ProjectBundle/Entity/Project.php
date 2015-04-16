@@ -35,8 +35,8 @@ class Project
      * @var integer
      */
     private $amountRequested;
-
-    /**
+	
+	/**
      * @var integer
      */
     private $amountWon;
@@ -72,13 +72,6 @@ class Project
     */
      private $image;
 
-
-    /**
-     * @var integer
-     */
-    private $author;
-
-
     /**
      * @var integer
      */
@@ -89,13 +82,23 @@ class Project
      */
     private $pushers;
 
-
+    /**
+     * @var string
+     */
+    private $author;
 
     /**
      * Get id
      *
      * @return integer 
      */
+	 
+	public function __construct()
+	{
+		$this->beginDate = new \DateTime();
+		$this->amountWon = 0;
+	}
+	
     public function getId()
     {
         return $this->id;
@@ -191,29 +194,6 @@ class Project
     public function getAmountRequested()
     {
         return $this->amountRequested;
-    }
-
-    /**
-     * Set amountWon
-     *
-     * @param integer $amountWon
-     * @return Project
-     */
-    public function setAmountWon($amountWon)
-    {
-        $this->amountWon = $amountWon;
-
-        return $this;
-    }
-
-    /**
-     * Get amountWon
-     *
-     * @return integer 
-     */
-    public function getAmountWon()
-    {
-        return $this->amountWon;
     }
 
     /**
@@ -374,32 +354,6 @@ class Project
     {
         return $this->homepage;
     }
-
-    // TEST
-
-    /**
-     * Set author
-     *
-     * @param integer $author
-     * @return Project
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return integer 
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
 
     /**
      * Set pushers
@@ -825,5 +779,51 @@ class Project
 
         // « nettoie » la propriété « file » comme vous n'en aurez plus besoin
         $this->file = null;
+    }
+
+    /**
+     * Set author
+     *
+     * @param string $author
+     * @return Project
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return string 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set amountWon
+     *
+     * @param integer $amountWon
+     * @return Project
+     */
+    public function setAmountWon($amountWon)
+    {
+        $this->amountWon = $amountWon;
+    
+        return $this;
+    }
+
+    /**
+     * Get amountWon
+     *
+     * @return integer 
+     */
+    public function getAmountWon()
+    {
+        return $this->amountWon;
     }
 }

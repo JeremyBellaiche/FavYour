@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+    {% block body %}
+
+        <div class="row">
+			<div class="inbox">
+			<h2>Messagerie</h2>
+				<a href="{{ url('fos_message_inbox') }}"><button type="button" class="btn btn-default"><i class="fa fa-inbox"></i> Boîte de réception</button></a>
+				<a href="{{ url('fos_message_sent') }}"><button type="button" class="btn btn-default"><i class="fa fa-share"></i> Messages envoyés</button></a>
+				<a href="{{ url('fos_message_deleted') }}"><button type="button" class="btn btn-default"><i class="fa fa-trash"></i> Messages supprimés</button></a>
+				<a href="{{path('fos_message_thread_new')}}" class="btn btn-info"><i class="fa fa-paper-plane"></i> Envoyer un nouveau message</a>
+			</div>
+		</div>
+
+        {% block fos_message_content %}{% endblock %}
+
+    {% endblock %}

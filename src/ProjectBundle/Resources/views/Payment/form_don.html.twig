@@ -1,0 +1,34 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+	<div class="col-md-4"></div>
+	
+    <div class="col-md-4 log-theme">
+		<h2>Financer un projet</h2>
+		
+		<div class="col-md-offset-1 col-md-10">
+			<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+				<div class="form-group">
+					<label>Entrez le montant désiré</label>
+					<input type="text" name="amount"/>
+				</div>
+				<input name="currency_code" type="hidden" value="EUR" />
+				<input name="shipping" type="hidden" value="0.00" />
+				<input name="tax" type="hidden" value="0.00" />
+				<input name="return" type="hidden" value="http://favyour.olympe.in/success.php" />
+				<input name="cancel_return" type="hidden" value="http://favyour.olympe.in/cancel.html" />
+				<input name="notify_url" type="hidden" value="http://favyour.olympe.in/ipn.php" />
+				<input name="cmd" type="hidden" value="_xclick" />
+				<input name="business" type="hidden" value="favyour_vendeur@gmail.com" />
+				<input name="item_name" type="hidden" value="Don" />
+				<input name="projet" type="hidden" value="projet numero 2" />
+				<input name="donneur" type="hidden" value="donneur numerp 2" />
+				<!--input name="no_note" type="hidden" value="1" />
+				<input name="lc" type="hidden" value="FR" />
+				<input name="bn" type="hidden" value="PP-BuyNowBF" /-->
+				<input name="custom" type="hidden" value="projet=p2&donneur=d2&receveur=r3" />
+				<button type="submit" id="submit" class="btn btn-default col-md-offset-4">Faire un don</button>
+			</form>
+		</div>
+	{% endblock %}

@@ -77,9 +77,10 @@ ProjectBundle\Entity\Project:
             unsigned: false
             comment: ''
         author:
-            type: integer
-            nullable: true
-            unsigned: false
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
             comment: ''
         pushers:
             type: integer
