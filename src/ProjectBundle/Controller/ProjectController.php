@@ -5,12 +5,15 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Util\StringUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectBundle\Entity\Project;
 use ProjectBundle\Entity\FavoritedProject;
 use ProjectBundle\Form\ProjectType;
+use ProjectBundle\Form\SearchType;
 
 
 class ProjectController extends Controller
@@ -25,7 +28,11 @@ class ProjectController extends Controller
      */
     public function showAction(Project $project)
     {
-        return ['project' => $project];
+        $author = $project->getAuthor();
+		$userManager = $this->get('fos_user.user_manager');
+		$user = $userManager->findUserByUsername($author);
+		
+		return $this->render('ProjectBundle:Project:show.html.twig', array('project' => $project, 'authorId' => $user->getId()));
     }
 
     /**
@@ -35,6 +42,11 @@ class ProjectController extends Controller
      */
     public function editAction(Project $project)
     {
+		if(!StringUtils::equals($this->getUser()->getUsername(), $project->getAuthor()))
+		{
+			throw new AccessDeniedException('Vous n\'avez pas la permission d\'éditer ce projet.');
+		}
+		
         $em = $this -> getDoctrine() -> getEntityManager();
 
         $form = $this -> createForm(new ProjectType(), $project);
@@ -76,6 +88,11 @@ class ProjectController extends Controller
             
             if($form -> handleRequest($request)->isValid()){
                 $em = $this -> getDoctrine() -> getManager(); 
+				$project->setAuthor($this->getUser()->getUsername());
+				$duree = new \DateInterval('P'.$project->getDuree().'D');
+				$newDate = new \DateTime();
+				$endDate = $newDate->add($duree);
+				$project->setEndDate($endDate);
                 $project->upload();
 
 
@@ -150,12 +167,9 @@ class ProjectController extends Controller
     */
     public function myprojectsAction (){
 
-
-            $currentId = $this->get('security.token_storage')->getToken()->getUser();
-
             $Projects = $this->getDoctrine()->getManager()
                     ->getRepository('ProjectBundle:Project')
-                    ->findByAuthor($currentId);
+                    ->findByAuthor($this->getUser()->getUsername());
 
         return $this -> render('ProjectBundle:Back:myprojects.html.twig', array(
             'Projects' => $Projects,
@@ -224,6 +238,87 @@ class ProjectController extends Controller
     }
 
 
+    /**
+    * @Route("/push", name ="push")
+    */
+    public function pushAction(Request $request)
+    {
+        return $this->render("ProjectBundle:Push:push.html.twig");
+    }
+
+    /**
+    * @Route("/search", name ="search")
+    */
+    public function postSearch(Request $request)
+    {
+        $array = [];
+        $search = $this->getRequest()->request;
+        // On a initialisé notre PUTAIN de tableau (ET oui c'est un putain de trafic)
+        if($search->get('Art')){
+            array_push($array, 'Art');
+        }
+        if($search->get('Littérature')){
+            array_push($array, 'Littérature');
+        }
+        if($search->get('Spectacle')){
+            array_push($array, 'Spectacle');
+        }
+        if($search->get('Photographie')){
+            array_push($array, 'Photographie');
+        }
+        if($search->get('Mode')){
+            array_push($array, 'Mode');
+        }
+        if($search->get('Journalisme')){
+            array_push($array, 'Journalisme');
+        }
+        if($search->get('Education')){
+            array_push($array, 'Education');
+        }
+        if($search->get('Ecologie')){
+            array_push($array, 'Ecologie');
+        }
+        if($search->get('Solidarité')){
+            array_push($array, 'Solidarité');
+        }
+        if($search->get('Design')){
+            array_push($array, 'Design');
+        }
+        if($search->get('Invention')){
+            array_push($array, 'Invention');
+        }
+        if($search->get('Film')){
+            array_push($array, 'Film');
+        }
+        if($search->get('Cuisine')){
+            array_push($array, 'Cuisine');
+        }
+        if($search->get('Jeux')){
+            array_push($array, 'Jeux');
+        }
+        if($search->get('Application')){
+            array_push($array, 'Application');
+        }
+        if($search->get('Gadgets')){
+            array_push($array, 'Gadgets');
+        }
 
 
+        $projects = $this->getDoctrine()->getManager()
+                    ->getRepository('ProjectBundle:Project')
+                    ->findBy(
+                       array('categorie' => $array )        // $where 
+                     );
+
+
+
+        return $this->render('ProjectBundle:Push:search.html.twig', array(
+            'projects' => $projects
+        ));
+    }
+	
+	public function donateAction()
+	{
+		return $this->render('ProjectBundle:Payment:form_don.html.twig');
+	}
 }  

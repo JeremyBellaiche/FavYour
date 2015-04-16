@@ -388,3 +388,34 @@ margin-top: 40px;
 	margin-top: 34px;
 	margin-bottom: 10px;
 }
+
+.margin-tab-prof{
+	margin-top: 40px;
+}
+
+.margin-bar-prof{
+	margin-right: 10px;
+}
+
+.inbox{
+	text-align: center;
+	margin: 40px;
+}
+
+.message{
+	width: 500px;
+	background-color: rgba(199, 199, 199, 0.2);
+	border-radius: 5px;
+	border: 1px solid #DDD;
+	padding-bottom: 10px;
+	margin: 15px;
+	word-wrap: break-word;
+}
+
+.msg-text {
+	font-size: 15px;
+}
+
+.reply {
+	margin-top: 60px;
+}

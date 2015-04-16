@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectBundle\Entity\Project;
 use ProjectBundle\Form\ProjectType;
 use UserBundle\Entity\User;
+use UserBundle\Form\IdentityPictureType;
 
 class DefaultController extends Controller
 {
@@ -36,7 +37,32 @@ class DefaultController extends Controller
      */
     public function showAction(User $user)
     {
-        return ['user' => $user];
+
+        $em = $this -> getDoctrine() -> getEntityManager();
+
+            $Projects = $this->getDoctrine()->getManager()
+                    ->getRepository('ProjectBundle:Project')
+                    ->findByAuthor($user->getUsername());
+		
+		/* Upload photo profil */
+            
+        $form = $this->createForm(new IdentityPictureType(), $user);
+
+        if ($this->getRequest()->getMethod() === 'POST') {
+            $form->bind($this->getRequest());
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getEntityManager();
+                
+                $user->uploadProfilePicture();
+                
+                $em->persist($user);
+                $em->flush();
+
+                $this->redirect($this->generateUrl('homepage'));
+			}
+		}
+    
+        return $this->render('UserBundle:Default:show.html.twig', array('user' => $user, 'id' => $user->getId(), 'Projects' => $Projects, 'form' => $form->createView()));
     }
 
 }

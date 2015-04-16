@@ -3,10 +3,140 @@
 
 {% block body %}
 
-	
-	<form action="{{path("edit",{ id : id })}}" method="post">
-	{{form_widget(form)}}
-	<input type="submit">
-	</form>
+	<div class="container">
+		<div class="col-md-offset-2 col-md-8 log-theme">
+			<h2>Modifier projet</h2>
+			<form action="{{path("edit",{ id : id })}}" method="post">
+				{{ form_start(form, { 'attr': {'class': ''} })  }}
+												
+											<h4 class="text-center">Informations</h4>
+
+								            <div class="form-group">
+												{{ form_label(form.title) }}
+												{{ form_widget(form.title,{'attr': {'class': 'form-control'}}) }}
+									      		{{ form_errors(form.title) }}
+											</div>
+
+											<div class="form-group">
+												{{ form_label(form.categorie) }}
+												{{ form_widget(form.categorie,{'attr': {'class': 'form-control'}}) }}
+									      		{{ form_errors(form.categorie) }}
+											</div>
+
+											<div class="form-group">
+												{{ form_label(form.location) }}
+												{{ form_widget(form.location,{'attr': {'class': 'form-control'}}) }}
+									      		{{ form_errors(form.location) }}
+											</div>
+											
+											<fieldset hide>
+												<div class="form-group">
+													{{ form_label(form.file) }}
+													{{ form_widget(form.file) }}
+										      		{{ form_errors(form.file) }}
+												</div>
+											</fieldset>
+
+											 <fieldset disabled>
+												<div class="form-group">
+													{{ form_label(form.duree) }}
+													{{ form_widget(form.duree,{'attr': {'class': 'form-control'}}) }}
+										      		{{ form_errors(form.duree) }}
+												</div>
+											 </fieldset>
+			
+											<fieldset disabled>
+												<div class="form-group">
+													{{ form_label(form.amountRequested) }}
+													{{ form_widget(form.amountRequested,{'attr': {'class': 'form-control'}}) }}
+										      		{{ form_errors(form.amountRequested) }}
+												</div>
+											</fieldset>
+											
+											<div class="form-group">
+												{{ form_label(form.description) }}
+												{{ form_widget(form.description,{'attr': {'class': 'form-control','rows':"10"}}) }}
+									      		{{ form_errors(form.description) }}
+											</div>
+											
+
+											<div class="clearfix"></div>
+											<h4 class="text-center">Récompenses</h4>
+
+
+											<div class="form-group">
+												{{ form_label(form.titreRecompense1) }}
+												{{ form_widget(form.titreRecompense1,{'attr': {'class': 'form-control'}}) }}
+									      		{{ form_errors(form.titreRecompense1) }}
+											</div>
+													
+											<div class="form-group">
+												{{ form_label(form.descriptionRecompense1) }}
+												{{ form_widget(form.descriptionRecompense1,{'attr': {'class': 'form-control','rows':"5"}}) }}
+									      		{{ form_errors(form.descriptionRecompense1) }}
+											</div>
+
+											<div class="form-group">
+												{{ form_label(form.titreRecompense2) }}
+												{{ form_widget(form.titreRecompense2,{'attr': {'class': 'form-control'}}) }}
+									      		{{ form_errors(form.titreRecompense2) }}
+											</div>
+													
+											<div class="form-group">
+												{{ form_label(form.descriptionRecompense2) }}
+												{{ form_widget(form.descriptionRecompense2,{'attr': {'class': 'form-control','rows':"5"}}) }}
+									      		{{ form_errors(form.descriptionRecompense2) }}
+											</div>
+
+											<div class="form-group">
+												{{ form_label(form.titreRecompense3) }}
+												{{ form_widget(form.titreRecompense3,{'attr': {'class': 'form-control'}}) }}
+									      		{{ form_errors(form.titreRecompense3) }}
+											</div>
+													
+											<div class="form-group">
+												{{ form_label(form.descriptionRecompense3) }}
+												{{ form_widget(form.descriptionRecompense3,{'attr': {'class': 'form-control','rows':"5"}}) }}
+									      		{{ form_errors(form.descriptionRecompense3) }}
+											</div>
+
+											<div class="form-group">
+												{{ form_label(form.titreRecompense4) }}
+												{{ form_widget(form.titreRecompense4,{'attr': {'class': 'form-control'}}) }}
+									      		{{ form_errors(form.titreRecompense4) }}
+											</div>
+													
+											<div class="form-group">
+												{{ form_label(form.descriptionRecompense4) }}
+												{{ form_widget(form.descriptionRecompense4,{'attr': {'class': 'form-control','rows':"5"}}) }}
+									      		{{ form_errors(form.descriptionRecompense4) }}
+											</div>
+
+											<div class="form-group">
+												{{ form_label(form.titreRecompense5) }}
+												{{ form_widget(form.titreRecompense5,{'attr': {'class': 'form-control'}}) }}
+									      		{{ form_errors(form.titreRecompense5) }}
+											</div>
+													
+											<div class="form-group">
+												{{ form_label(form.descriptionRecompense5) }}
+												{{ form_widget(form.descriptionRecompense5,{'attr': {'class': 'form-control','rows':"5"}}) }}
+									      		{{ form_errors(form.descriptionRecompense5) }}
+											</div>
+
+		
+											
+													
+									
+
+
+								        <button type="submit" class="btn btn-success col-md-offset-4 col-md-4">Sauvegarder les changements</button>
+							        </div>
+
+
+				        {{ form_end(form) }}
+			</form>
+		</div>
+	<div>
 
 {% endblock %}

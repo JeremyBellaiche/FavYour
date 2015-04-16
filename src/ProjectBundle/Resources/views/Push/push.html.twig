@@ -14,115 +14,70 @@
               </span>
               <h1>Choisissez des catégories</h1>
 
-
-              <div class="btn-group search-push" data-toggle="buttons">
+              <form action="{{path('search')}}" method="post" class="btn-group search-push">
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off" id="checkblanche">  Littérature
+                  <input type="checkbox" autocomplete="off" name="Littérature">  Littérature
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Art
+                  <input type="checkbox" autocomplete="off" name="Art"> Art
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Spectacle
+                  <input type="checkbox" autocomplete="off" name="Spectacle"> Spectacle
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Photographie
+                  <input type="checkbox" autocomplete="off" name="Photographie"> Photographie
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Mode
+                  <input type="checkbox" autocomplete="off" name="Mode"> Mode
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Journalisme
+                  <input type="checkbox" autocomplete="off" name="Journalisme"> Journalisme
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Education
+                  <input type="checkbox" autocomplete="off" name="Education"> Education
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Ecologie
+                  <input type="checkbox" autocomplete="off" name="Ecologie"> Ecologie
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Solidarité
+                  <input type="checkbox" autocomplete="off" name="Solidarité"> Solidarité
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Aventure - Sport
+                  <input type="checkbox" autocomplete="off" name="Aventure - Sport"> Aventure - Sport
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Design
+                  <input type="checkbox" autocomplete="off" name="Design"> Design
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Invention
+                  <input type="checkbox" autocomplete="off" name="Invention"> Invention
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Film 
+                  <input type="checkbox" autocomplete="off" name="Film"> Film 
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Cuisine
+                  <input type="checkbox" autocomplete="off" name="Cuisine"> Cuisine
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Jeux
+                  <input type="checkbox" autocomplete="off" name="Jeux"> Jeux
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Projet personnel
+                  <input type="checkbox" autocomplete="off" name="Projet personnel"> Projet personnel
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Application
+                  <input type="checkbox" autocomplete="off" name="Application"> Application
                 </label>
                 <label class="btn btn-search">
-                  <input type="checkbox" autocomplete="off"> Gadgets
+                  <input type="checkbox" autocomplete="off" name="Gadgets"> Gadgets
                 </label>
-        </div>
-        <a href="{{path('bepushed')}}" class="btn btn-warning btn-pad-push-t"><i class="fa fa-chevron-circle-down"></i> Lancer la recherche !</a>
+        
+                <button type="submit" class="btn btn-warning btn-pad-push-t"><i class="fa fa-chevron-circle-down"></i> Lancer la recherche !</button>
+              </form>
 
       </div>
     </header>
       
 
 
-      <div class="col-md-offset-1 col-md-10">
-        <h2 class="marg-h3-push">Résultats de la recherche</h2>
-            
-         <div class="col-md-4"><p class="text-success">Trier par besoin de financement croissant <i class="glyphicon glyphicon-sort-by-attributes"></i></p></div>
-         <div class="col-md-4"><p class="text-danger">Trier par besoin de financement décroissant <i class="glyphicon glyphicon-sort-by-attributes-alt"></i></p></div>
-         <div class="col-md-4"><p class="text-primary">Trier par du plus anciens au plus récent <i class="glyphicon glyphicon-calendar"></i></p></div>
-
-
-          <section class="margin-section-push">
-              <div class="col-md-offset-1 col-md-5">
-                <div class="col-lg-12 text-center">
-                    <img class="img-circle" src="{{ asset('uploads/membres/test1.jpg' ) }}" alt="" width="140" height="140">
-                    <h2>TEST</h2>
-                    <p>TEST</p>
-
-                    <div class="progress bar-prog-index">
-
-                                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%;">
-                                  70%
-                                </div>
-                     </div>
-
-                    <p><a class="btn btn-default" href="" role="button">En savoir plus »</a></p>
-                </div><!-- /.col-lg-4 -->
-                </div>
-
-
-                <div class="col-md-5">
-                <div class="col-lg-12 text-center">
-                    <img class="img-circle" src="{{ asset('uploads/membres/test1.jpg' ) }}" alt="" width="140" height="140">
-                    <h2>TEST</h2>
-                    <p>TEST</p>
-
-                    <div class="progress bar-prog-index">
-
-                                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%;">
-                                  70%
-                                </div>
-                     </div>
-
-                    <p><a class="btn btn-default" href="" role="button">En savoir plus »</a></p>
-                </div><!-- /.col-lg-4 -->
-                </div>
-          </section>
-      </div>
 
 
 

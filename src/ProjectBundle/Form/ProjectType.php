@@ -22,13 +22,11 @@ class ProjectType extends AbstractType
 				      'Education'=>'Education',
 				      'Ecologie'=>'Ecologie',
 				      'Solidarité'=>'Solidarité',
-				      'Aventure - Sport'=>'Aventure - Sport',
 				      'Design'=>'Design',
 				      'Invention'=>'Invention',
 				      'Film'=>'Film',
 				      'Cuisine'=>'Cuisine',
 				      'Jeux'=>'Jeux',
-				      'Projet perso'=>'Projet perso',
 				      'Application'=>'Application',
 				      'Gadgets'=>'Gadgets',),
 				'multiple'=>false,
@@ -37,16 +35,16 @@ class ProjectType extends AbstractType
 			->add('duree', 'integer')
 			->add('amountRequested', 'integer')
 			->add('description', 'textarea')
-			->add('titreRecompense1', 'text')
-			->add('descriptionRecompense1','textarea')
-			->add('titreRecompense2', 'text')
-			->add('descriptionRecompense2','textarea')
-			->add('titreRecompense3', 'text')
-			->add('descriptionRecompense3','textarea')
-			->add('titreRecompense4', 'text')
-			->add('descriptionRecompense4','textarea')
-			->add('titreRecompense5', 'text')
-			->add('descriptionRecompense5','textarea')
+			->add('titreRecompense1', 'text', array('required' => false))
+			->add('descriptionRecompense1','textarea', array('required' => false))
+			->add('titreRecompense2', 'text', array('required' => false))
+			->add('descriptionRecompense2','textarea', array('required' => false))
+			->add('titreRecompense3', 'text', array('required' => false))
+			->add('descriptionRecompense3','textarea', array('required' => false))
+			->add('titreRecompense4', 'text', array('required' => false))
+			->add('descriptionRecompense4','textarea', array('required' => false))
+			->add('titreRecompense5', 'text', array('required' => false))
+			->add('descriptionRecompense5','textarea', array('required' => false))
 			->add('file');
 
 

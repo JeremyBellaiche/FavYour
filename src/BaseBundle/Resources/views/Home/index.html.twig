@@ -24,7 +24,12 @@
 			{% for project in projects %}	
 	        <div class="col-lg-4 text-center">
 	          <img class="img-circle" src="{{ asset('uploads/documents/' ~ project.path) }}" alt="" width="140" height="140">
-	          <h3>{{project.title}}</h3>
+	          <h3>
+	          	<a href="{{ path('project_show', {'id': project.id}) }}">
+								{{ project.title|length > 20 ? project.title|slice(0,20) ~ '...' |raw : project.title|raw }}
+
+		                    	</a>
+		      </h3>
 	          <p>{{ project.description | slice(0,230) ~ '...' }}</p>
 				
 			  <div class="progress bar-prog-index">
@@ -46,7 +51,11 @@
 			{% for lastProject in lastProjects %}	
 	        <div class="col-lg-4 text-center">
 	          <img class="img-circle" src="{{ asset('uploads/documents/' ~ lastProject.path) }}" alt="" width="140" height="140">
-	          <h3>{{lastProject.title}}</h3>
+	          <h3><a href="{{ path('project_show', {'id': lastProject.id}) }}">
+								{{ lastProject.title|length > 20 ? lastProject.title|slice(0,20) ~ '...' |raw : lastProject.title|raw }}
+
+		                    	</a>
+		      </h3>
 	          <p>{{ lastProject.description | slice(0,230) ~ '...' }}</p>
 
 	          <div class="progress bar-prog-index">

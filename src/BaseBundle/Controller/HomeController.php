@@ -37,24 +37,7 @@ class HomeController extends Controller
              );
     }
 
-    /*
-    public function indexAction()
-    {
-        return $this->render('KnpKnoodleBundle:Survey:index.html.twig', [
-            'name' => 'IIM'
-        ]);
-    }
-    */
-
-
-    // Page Push : Route => /push
-    /**
-    * @Route("/push", name ="push")
-    */
-    public function pushAction()
-    {
-        return $this->render('ProjectBundle:Push:push.html.twig');
-    }
+ 
 
 
     // Page Pushers : Route => /be-pushed

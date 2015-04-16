@@ -37,11 +37,6 @@ class Project
     private $amountRequested;
 
     /**
-     * @var integer
-     */
-    private $amountWon;
-
-    /**
      * @var \DateTime
      */
     private $endDate;
@@ -72,13 +67,6 @@ class Project
     */
      private $image;
 
-
-    /**
-     * @var integer
-     */
-    private $author;
-
-
     /**
      * @var integer
      */
@@ -89,7 +77,10 @@ class Project
      */
     private $pushers;
 
-
+    /**
+     * @var string
+     */
+    private $author;
 
     /**
      * Get id
@@ -191,29 +182,6 @@ class Project
     public function getAmountRequested()
     {
         return $this->amountRequested;
-    }
-
-    /**
-     * Set amountWon
-     *
-     * @param integer $amountWon
-     * @return Project
-     */
-    public function setAmountWon($amountWon)
-    {
-        $this->amountWon = $amountWon;
-
-        return $this;
-    }
-
-    /**
-     * Get amountWon
-     *
-     * @return integer 
-     */
-    public function getAmountWon()
-    {
-        return $this->amountWon;
     }
 
     /**
@@ -374,32 +342,6 @@ class Project
     {
         return $this->homepage;
     }
-
-    // TEST
-
-    /**
-     * Set author
-     *
-     * @param integer $author
-     * @return Project
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return integer 
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
 
     /**
      * Set pushers
@@ -771,5 +713,82 @@ class Project
         // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
         // le document/image dans la vue.
         return 'uploads/documents';
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Project
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    public $file;
+
+    
+
+    public function upload()
+    {
+        // la propriété « file » peut être vide si le champ n'est pas requis
+        if (null === $this->file) {
+            return;
+        }
+
+        // utilisez le nom de fichier original ici mais
+        // vous devriez « l'assainir » pour au moins éviter
+        // quelconques problèmes de sécurité
+
+        // la méthode « move » prend comme arguments le répertoire cible et
+        // le nom de fichier cible où le fichier doit être déplacé
+        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+
+        // définit la propriété « path » comme étant le nom de fichier où vous
+        // avez stocké le fichier
+        $this->path = $this->file->getClientOriginalName();
+
+        // « nettoie » la propriété « file » comme vous n'en aurez plus besoin
+        $this->file = null;
+    }
+
+    /**
+     * Set author
+     *
+     * @param string $author
+     * @return Project
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return string 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }
