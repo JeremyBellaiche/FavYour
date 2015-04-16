@@ -6,6 +6,17 @@
 
 	<div class="container container-profil col-md-12">
       
+      {% set fav = false %} 
+
+      {% for projet in testFav %}
+
+        {% if projet.userId == app.user.id %}
+            {% set fav = true %}
+        {% endif %}
+
+      {% endfor %}
+
+
 
       <div class="col-md-1"></div>
       <div class="col-md-11">
@@ -87,10 +98,25 @@
           
           <section class="marge-btn-projet">
             <div class="col-md-3">
-              <a href="{{ path('form_don_route') }}"><img src="{{asset('img/don.png')}}"></a>
-            </div>
+    
+              {% if project.endDate | date('U') >= date().timestamp %}
+                <a href="{{ path('form_don_route') }}"><img src="{{asset('img/don.png')}}"></a> 
+              {% endif %}
+              </div>
             <div class="col-md-3"> 
-              <a href="{{ path("ajouter-favoris", { id: project.id} ) }}" type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> Ajouter aux favoris</a>
+
+              {% if project.endDate | date('U') >= date().timestamp %}
+
+              
+                 {% if fav == true %}
+
+                 <a href="{{ path("remove-favoris", { id: project.id} ) }}" type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Retirer des favoris favoris</a>
+                {% else %}
+                  <a href="{{ path("ajouter-favoris", { id: project.id} ) }}" type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> Ajouter aux favoris</a>
+              
+                {% endif %}
+
+              {% endif %}
             </div>
             <div class="col-md-3">
               <button type="button" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Partager sur Facebook</button>

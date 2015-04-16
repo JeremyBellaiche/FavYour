@@ -31,8 +31,14 @@ class ProjectController extends Controller
         $author = $project->getAuthor();
 		$userManager = $this->get('fos_user.user_manager');
 		$user = $userManager->findUserByUsername($author);
+
+
+        // liste des favoris de l'user 
+        $testFav = $this->getDoctrine()->getManager()
+        ->getRepository('ProjectBundle:FavoritedProject')
+        ->findByProjectId($project ->getId());
 		
-		return $this->render('ProjectBundle:Project:show.html.twig', array('project' => $project, 'authorId' => $user->getId()));
+		return $this->render('ProjectBundle:Project:show.html.twig', array('project' => $project, 'authorId' => $user->getId(),'testFav' => $testFav));
     }
 
     /**
