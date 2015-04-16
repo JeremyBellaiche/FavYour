@@ -151,6 +151,29 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'BaseBundle\\Controller\\HomeController::bepushedAction',  '_route' => 'bepushed',);
         }
 
+        // base_homepage
+        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'base_homepage')), array (  '_controller' => 'BaseBundle:Default:index',));
+        }
+
+        // contact
+        if ($pathinfo === '/contact') {
+            return array (  '_controller' => 'BaseBundle\\Controller\\HomeController::contactAction',  '_route' => 'contact',);
+        }
+
+        if (0 === strpos($pathinfo, '/admin/answer')) {
+            // answer
+            if (preg_match('#^/admin/answer/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'answer')), array (  '_controller' => 'BaseBundle\\Controller\\HomeController::answerAction',));
+            }
+
+            // all_answers
+            if ($pathinfo === '/admin/answer') {
+                return array (  '_controller' => 'BaseBundle\\Controller\\HomeController::allAnswersAction',  '_route' => 'all_answers',);
+            }
+
+        }
+
         // project_show
         if (0 === strpos($pathinfo, '/project') && preg_match('#^/project/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'project_show')), array (  '_controller' => 'ProjectBundle\\Controller\\ProjectController::showAction',));
