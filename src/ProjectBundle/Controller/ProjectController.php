@@ -12,7 +12,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ProjectBundle\Entity\Project;
 use ProjectBundle\Entity\FavoritedProject;
+use ProjectBundle\Entity\News;
 use ProjectBundle\Form\ProjectType;
+use ProjectBundle\Form\NewsType;
 use ProjectBundle\Form\SearchType;
 
 
@@ -38,7 +40,32 @@ class ProjectController extends Controller
         ->getRepository('ProjectBundle:FavoritedProject')
         ->findByProjectId($project ->getId());
 		
-		return $this->render('ProjectBundle:Project:show.html.twig', array('project' => $project, 'authorId' => $user->getId(),'testFav' => $testFav));
+		// Ajout de news
+		$em = $this->getDoctrine()->getManager();
+		$news = new News();
+		$form = $this->get('form.factory')->create(new NewsType(), $news);
+            
+        if ($this->getRequest()->getMethod() === 'POST')
+		{
+            $form->bind($this->getRequest());
+            if ($form->isValid())
+			{
+                $news->setProject($project);
+				$news->upload();
+				$em->persist($news);
+				$em->flush();
+			}
+		}
+		
+		// Récupération des news
+		$listNews = $em
+		->getRepository('ProjectBundle:News')
+		->findBy(
+			array('project' => $project),
+			array('date' => 'desc')
+		);
+		
+		return $this->render('ProjectBundle:Project:show.html.twig', array('project' => $project, 'authorId' => $user->getId(), 'testFav' => $testFav, 'form' => $form->createView(), 'listNews' => $listNews));
     }
 
     /**

@@ -33,7 +33,7 @@ class User extends BaseUser implements ParticipantInterface
     public $pictureName;
 
     /**
-     * @Assert\File(maxSize="500k")
+     * @Assert\Image(maxSize="500k")
      */
     public $file;
     

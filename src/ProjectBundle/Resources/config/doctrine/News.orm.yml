@@ -1,0 +1,30 @@
+ProjectBundle\Entity\News:
+    type: entity
+    table: News
+    repositoryClass: ProjectBundle\Entity\NewsRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        content:
+            type: text
+        date:
+            type: datetime
+        path:
+            type: string
+            nullable: true
+
+    manyToOne:
+      project:
+        targetEntity: ProjectBundle\Entity\Project
+        joinColumn:
+          name: project_id
+          referencedColumnName: id
+
+    lifecycleCallbacks: {  }
