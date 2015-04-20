@@ -16,6 +16,7 @@ use ProjectBundle\Entity\News;
 use ProjectBundle\Form\ProjectType;
 use ProjectBundle\Form\NewsType;
 use ProjectBundle\Form\SearchType;
+use BaseBundle\Entity\Image;
 
 
 class ProjectController extends Controller
@@ -28,7 +29,7 @@ class ProjectController extends Controller
      * @ParamConverter("project", class="ProjectBundle:Project")
      * @Template()
      */
-    public function showAction(Project $project)
+    public function showAction(Request $request, Project $project)
     {
         $author = $project->getAuthor();
 		$userManager = $this->get('fos_user.user_manager');
@@ -65,9 +66,65 @@ class ProjectController extends Controller
 			array('date' => 'desc')
 		);
 		
-		return $this->render('ProjectBundle:Project:show.html.twig', array('project' => $project, 'authorId' => $user->getId(), 'testFav' => $testFav, 'form' => $form->createView(), 'listNews' => $listNews));
-    }
+		
+		
+		
+		
+		
+		// Ajout d'images pour la galerie
+			$image = new Image();
+			$formImage = $this->get('form.factory')->createBuilder('form', $image)
+			->add('file')
+			->add('Ajouter', 'submit')
+			->getForm()
+			;
+		
+			if ($formImage -> handleRequest($request)->isValid()) {
+					
+					if ($image->getFile()==null) { // gestion d'erreur : si l'user clique sur ajouter sans avoir choisi une image,
+						$request->getSession()->getFlashBag()->add('erreur', 'Vous ne pouvez pas ajouter aucune image ! Cliquez sur "Choisissez un fichier" et choisissez votre image.'); // alors on envoie un mess d'erreur.
+					}
+					else {
+						
+						$em = $this->getDoctrine()->getManager();
 
+						$image->upload();
+						$image->setProject($project); // on lie l'image au projet
+						$em->persist($image);
+						$em->flush();
+				}
+		
+			}
+			
+			
+			
+			
+			
+			
+		// Récupération des images de la galerie
+		
+		$images = $this->getDoctrine()->getManager()
+        ->getRepository('BaseBundle:Image')
+        ->findByProject($project);
+		
+		
+		
+		
+		
+		
+			
+		return $this->render('ProjectBundle:Project:show.html.twig', array('project' => $project, 'authorId' => $user->getId(), 'testFav' => $testFav, 'form' => $form->createView(), 'listNews' => $listNews, 'images' => $images, 'formImage' => $formImage->createView()));
+    
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
     /**
      * @Route("/edit/{id}", name="edit")
      * @ParamConverter("project", class="ProjectBundle:Project")

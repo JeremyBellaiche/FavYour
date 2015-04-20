@@ -34,7 +34,7 @@
     <parameter key="database_port">null</parameter>
     <parameter key="database_name">dev_favyour</parameter>
     <parameter key="database_user">root</parameter>
-    <parameter key="database_password">root</parameter>
+    <parameter key="database_password">null</parameter>
     <parameter key="mailer_transport">smtp</parameter>
     <parameter key="mailer_host">127.0.0.1</parameter>
     <parameter key="mailer_user">null</parameter>
@@ -463,7 +463,7 @@
     <parameter key="assetic.read_from">C:\wamp\www\FavYour\app/../web</parameter>
     <parameter key="assetic.write_to">C:\wamp\www\FavYour\app/../web</parameter>
     <parameter key="assetic.variables" type="collection"/>
-    <parameter key="assetic.java.bin">C:\ProgramData\Oracle\Java\javapath\java.EXE</parameter>
+    <parameter key="assetic.java.bin">C:\windows\system32\java.EXE</parameter>
     <parameter key="assetic.node.bin">/usr/bin/node</parameter>
     <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
     <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
@@ -3114,7 +3114,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5533bc8f84648</argument>
+            <argument>5534fed913750</argument>
           </service>
         </argument>
       </argument>
@@ -3424,7 +3424,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>5533bc8f84648</argument>
+            <argument>5534fed913750</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -3877,7 +3877,7 @@
         <argument key="port">null</argument>
         <argument key="dbname">dev_favyour</argument>
         <argument key="user">root</argument>
-        <argument key="password">root</argument>
+        <argument key="password">null</argument>
         <argument key="charset">UTF8</argument>
         <argument key="driverOptions" type="collection"/>
       </argument>

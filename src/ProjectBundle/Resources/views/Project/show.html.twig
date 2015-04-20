@@ -1,6 +1,28 @@
 {# src/ProjectBundle/Resources/views/Project/show.html.twig #}
 {% extends "::base.html.twig" %}
 
+
+		
+	{%block head %}
+	
+		<script type="text/javascript" src="http://slideshow.triptracker.net/slide.js"></script>
+			
+		<script type="text/javascript">
+		
+			<!--
+			  var viewer = new PhotoViewer();
+			  
+			  viewer.disableEmailLink();
+			  viewer.disablePhotoLink();
+			  
+			  {% for image in images %}
+				viewer.add('{{ asset('uploads/documents/' ~ image.path) }}');
+			  {% endfor %}
+		
+		//--></script>
+		
+	{% endblock %}
+
 	{% block body %}
 
 
@@ -209,6 +231,7 @@
 
           <li role="presentation" class=""><a href="#commentaires" role="tab" id="commentaires-tab" data-toggle="tab" aria-controls="commentaires" aria-expanded="false">Commentaires</a></li>
 
+		  <li role="presentation" class=""><a href="#galerie" role="tab" id="galerie-tab" data-toggle="tab" aria-controls="galerie" aria-expanded="false">Galerie</a></li>
           
         </ul>
 
@@ -296,6 +319,51 @@
               </script>
               <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
             </p>
+          </div>
+		  
+		  <div role="tabpanel" class="tab-pane fade" id="galerie" aria-labelledby="galerie-tab">
+			
+			
+			<center>
+			<div class="row">
+				</br>
+					
+				{% for image in images %}
+					<div class="col-xs-6 col-md-3">
+					<a href="{{ asset('uploads/documents/' ~ image.path) }}" class="thumbnail" onclick="return viewer.show({{ loop.index0 }})">
+					<img src="{{ asset('uploads/documents/' ~ image.path) }}" alt="" /> </a>
+					</div>
+				{% endfor %}
+				
+			</div>
+			</center>
+			
+			
+			<center>
+		{% if app.user %}
+			{% if project.author == app.user.username %}
+				
+				<div class="form-group">
+				<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Ajouter une photo</a><div class="collapse" id="collapseExample">
+										{% for message in app.session.flashbag.get('erreur') %}
+											
+											</br>
+											<div class="alert alert-danger" role="alert">{{ message }}</div>
+											
+										{% endfor %}
+										
+										{{ form_start(formImage) }}
+										</br>
+										{{ form_widget(formImage.file, { 'attr' : { 'class':'btn btn-default' } }) }}
+							      		{{ form_errors(formImage.file) }}</br>
+										{{ form_widget(formImage.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+										
+				</div>
+				{{ form_end(formImage) }}
+				</div>
+			{% endif %}
+		{% endif %}
+			</center>
           </div>
 
         </div>

@@ -117,37 +117,4 @@ class Image
     // « nettoie » la propriété « file » comme vous n'en aurez plus besoin
     $this->file = null;
 }
-
-    /**
-     * Set project
-     *
-     * @param \ProjectBundle\Entity\Project $project
-     * @return Image
-     */
-    public function setProject(\ProjectBundle\Entity\Project $project = null)
-    {
-        $this->project = $project;
-    
-        return $this;
-    }
-
-    /**
-     * Get project
-     *
-     * @return \ProjectBundle\Entity\Project 
-     */
-    public function getProject()
-    {
-        return $this->project;
-    }
-	
-	/**
-     * Get file
-     *
-     *  
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
 }
